@@ -1,6 +1,6 @@
 // Preload all the assets
 class Preloader extends Phaser.Scene {
-  constructor() {
+    constructor() {
     super("preLoadScene");
   }
 
