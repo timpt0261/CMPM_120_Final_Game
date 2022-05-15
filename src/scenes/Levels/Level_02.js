@@ -12,7 +12,7 @@ class Level_02 extends Phaser.Scene {
     // set up Scene switcher
     this.input.keyboard.on('keydown', sceneSwitcher);
 
-    this.add.tileSprite(0, 0, game.config.height, game.config.width, 'blue_background').setOrigin(0, 0);
+    this.add.tileSprite(0, 0, game.config.height, game.config.width, 'blue_background').setOrigin(0, 0).setScale(2);
 
   }
 

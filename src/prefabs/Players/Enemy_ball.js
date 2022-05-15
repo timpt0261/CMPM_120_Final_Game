@@ -1,20 +1,27 @@
 // Create Enemy Ball
 class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, texture, frame) {
-    super(scene, x, y, texture, frame);
-
+  constructor(scene, x, y, texture, frame,size) {
+    super(scene, x, y, texture, frame, size);
+    this.scene = scene;
     scene.add.existing(this);
     scene.physics.add.existing(this);
-
-    addPhysics();
+    this.body.setCircle(size);
+    
   }
 
   addPhysics() {
     // add physics to main
+    
   }
 
-  update() {
+  update(player) {
     // add to update
+    var dist = Phaser.Math.Distance.BetweenPoints(player,this);
+   
+    if(dist <= 500){
+      console.log(dist);
+      this.scene.physics.moveToObject(this, player, 200);
+    }
   }
 
   reset() {

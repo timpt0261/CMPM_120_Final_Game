@@ -12,6 +12,7 @@ class Preloader extends Phaser.Scene {
     this.load.image('blue_background', 'art/blue_background.png');
     this.load.image('green_background', 'art/green_background.png');
     this.load.image('player', 'art/main_player.png');
+    this.load.image('enemy', 'art/enemy.png');
 
     this.createSFX();
 
