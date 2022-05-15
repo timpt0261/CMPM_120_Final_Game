@@ -3,6 +3,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, texture, frame,size) {
     super(scene, x, y, texture, frame, size);
     this.scene = scene;
+    this.size = size;
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.body.setCircle(size);
@@ -20,7 +21,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
    
     if(dist <= 500){
       console.log(dist);
-      this.scene.physics.moveToObject(this, player, 200);
+      this.scene.physics.moveToObject(this, player, 200/this.size);
     }
   }
 
