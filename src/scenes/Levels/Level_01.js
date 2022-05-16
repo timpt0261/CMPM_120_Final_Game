@@ -34,11 +34,7 @@ class Level_01 extends Phaser.Scene {
 
         this.physics.add.overlap(
             this.player,
-            this.enemy_1,
-            function (enemyEatsPlayer) {
-                enemyEatsPlayer.body.stop;
-                this.physics.world.removeCollider(collider);
-            },
+            this.enemy_1,this.reset(),
             null,
             this
         );
@@ -49,6 +45,13 @@ class Level_01 extends Phaser.Scene {
     update() {
         this.player.update();
         this.enemy_1.update(this.player);
+    }
+
+    reset(){
+
+        // this.player.reset();
+        this.enemy_1.reset();
+
     }
 
   // createEnemies(){
