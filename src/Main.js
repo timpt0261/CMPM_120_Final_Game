@@ -4,7 +4,7 @@ let currentScene;
 
 let config = {
     type: Phaser.CANVAS,
-    width: 640,
+    width: 900,
     height: 640,
     scene: [Preloader ,Level_01,Level_02,Level_03],
     title: 'Title In progress',
@@ -13,7 +13,7 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
     }
 }
