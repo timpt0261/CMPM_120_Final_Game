@@ -17,8 +17,9 @@ class Level_01 extends Phaser.Scene {
         
         // Add player
         this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',0).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
-        this.enemy_1 = new Enemy_Ball(this, 100, 100, 'enemy', 0, 100);
-        this.enemy_1.addPhysics();
+        
+        // Orginal ball size is 85
+        this.enemy_1 = new Enemy_Ball(this, 100, 100, 'enemy', 0, 85).setOrigin(0.5,0.5);
 
 
     }
