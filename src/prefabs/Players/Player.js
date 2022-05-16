@@ -10,6 +10,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   addPhysics() {
     // add physics to main
+    
   }
 
   update() {
