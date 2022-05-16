@@ -21,6 +21,13 @@ class Level_01 extends Phaser.Scene {
         // 
         this.enemy_1 = new Enemy_Ball(this, 100, 100, 'enemy',100,0).setOrigin(0.5,0.5);
 
+        this.physics.add.overlap(this.player, this.enemy_1, 
+            function(enemyEatsPlayer){
+                enemyEatsPlayer.body.stop;
+                this.physics.world.removeCollider(collider);
+
+            }, null, this);
+
 
     }
 
@@ -30,6 +37,7 @@ class Level_01 extends Phaser.Scene {
 
 
     }
+
 
     // createEnemies(){
 
