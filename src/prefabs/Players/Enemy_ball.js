@@ -1,7 +1,7 @@
 // Create Enemy Ball
 class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, texture, frame, size) {
-    super(scene, x, y, texture, frame, size);
+  constructor(scene, x, y, texture,size,frame) {
+    super(scene, x, y, texture, size,frame);
     this.scene = scene;
     this.size = size;
 
@@ -9,7 +9,9 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
-    this.body.setCircle(size);
+    // Maintains collides equal body
+    this.body.setSize(170,170);
+    this.body.setCircle(85);
     this.setScale(size / 85);
   }
 
@@ -19,7 +21,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
     // if dist is 500 or less player will move towards player
     // if (dist <= 500) {
     //   console.log(dist);
-    //   this.scene.physics.moveToObject(this, player, 200 / this.size);
+    //   this.scene.physics.moveToObject(this, player, 2000/this.size);
     // }
   }
 

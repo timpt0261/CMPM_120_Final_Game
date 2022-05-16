@@ -11,14 +11,24 @@ class Preloader extends Phaser.Scene {
     this.load.image("red_background", "art/red_background.png");
     this.load.image("blue_background", "art/blue_background.png");
     this.load.image("green_background", "art/green_background.png");
-    this.load.image("player", "art/main_player1.png");
+    // this.load.image("player", "art/player.png");
     this.load.image("enemy", "art/enemy.png");
+
+    this.createSprite();
 
     this.createSFX();
   }
 
   createSFX() {
     // should contain all Sound effects
+  }
+
+  createSprite() {
+    // load spritesheet()
+    this.load.spritesheet("player", "art/player.png", {
+      frameWidth: 200,
+      frameHeight: 200,
+    });
   }
 
   create() {
