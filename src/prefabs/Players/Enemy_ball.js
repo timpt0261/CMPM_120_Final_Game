@@ -18,19 +18,21 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
   update(player) {
     // calculates distance between player and enemy
     let dist = Phaser.Math.Distance.BetweenPoints(player, this);
-    let sizeDiff = this.size - player.size;
-    console.log("enemy size : " + this.size + " Player size: " + player.size + " Diff: " + sizeDiff);
+    let sizeDiff = Phaser.Math.Difference(player.size, this.size);
+    console.log("dist: %d enemy size : %d  Player size:  %d Diff: %d",dist,  this.size, player.size, sizeDiff, sizeDiff >= 0);
     // if dist is 400 or less player will move towards player
-    if (dist <= 400 && sizeDiff >= 0) {
+    if (dist <= 500 && sizeDiff >= 0) {
       console.log(dist);
       this.scene.physics.moveToObject(this, player, 2000 / this.size);
-    } else if (dist <= 200 && sizeDiff < 0) {
+    } else if (dist <= 200 && sizeDiff < 0) {2
       this.scene.physics.moveToObject(this, player, -2000 / this.size);
     }
   }
 
   reset() {
     // add reset
+    this.x = 200;
+    this.y = 200;
   }
 
   deleteSelf() {
