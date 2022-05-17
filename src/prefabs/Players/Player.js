@@ -10,19 +10,31 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    // Maintains collides equal body
-    this.body.setSize(200, 200);
-    this.body.setCircle(100);
-    this.setScale(size / 100);
-    //addPhysics();
+    this.addPhysics();
   }
 
   addPhysics() {
-    // add physics to main
+
+    // Maintains collides equal body
+    this.body.setSize(200, 200);
+    this.body.setCircle(100);
+
+    this.setScale(size / 100);
+
+    this.setScale(this.size/100);
+
+    this.speed = 100;
+    this.setMaxVelocity(200);
   }
 
-  update() {
-    // update
+  update(mouseX,mouseY) {
+    if (mouseX){  // Check if mouseX is undefined
+      this.angleToMouse = Phaser.Math.Angle.Between(this.x,this.y,mouseX,mouseY);
+      this.angleToMouse = this.angleToMouse * (180/Math.PI);
+      //console.log(this.x, this.y, mouseX, mouseY);
+      console.log(this.angleToMouse); 
+    }
+
   }
 
   reset() {

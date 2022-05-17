@@ -3,6 +3,7 @@ class Level_01 extends Phaser.Scene {
         super("Level_01");
     }
 
+
     create() {
         currentScene = 1;
         // set up Phaser-provided cursor key input
@@ -17,23 +18,21 @@ class Level_01 extends Phaser.Scene {
             .setScale(2);
 
         // Add player
-        this.player = new Player(
-            this,
-            this.game.config.width / 2,
-            this.game.config.height / 2,
-            "player",
-            60,
-            0
-        ).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
 
+        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',10,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
         
         this.createEnemies();
         this.physics.add.overlap(this.player,this.enemyGroup,this.EatenOrAlive,null, this);
+      
+      //         this.input.on('pointermove', (pointer) => {
+//             //console.log(pointer.x,pointer.y);
+//             this.mouseX = pointer.x;
+//             this.mouseY = pointer.y;
+//         });
     }
 
 
-
-    update() {
+   update() {
         this.player.update();
         this.enemy_1.update(this.player);
         this.enemy_2.update(this.player);
@@ -60,7 +59,11 @@ class Level_01 extends Phaser.Scene {
             // enemy can consume player
             this.Scene.pause();
 
-        }
+
+    }
+
+
+        
 
     }
 

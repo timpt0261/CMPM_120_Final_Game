@@ -27,8 +27,9 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
     // calculate diffence of size
     let sizeDiff = this.size - player.size;
 
+
     // if dist is 500 or less player will move towards player, and eat player
-    if (dist <= 500 && sizeDiff >= 0) {
+    if (dist <= 500 && sizeDiff >= 0) {    
       this.scene.physics.moveToObject(this, player, 2000 / this.size);
       // this.eat_or_die = true;
     } else if (dist <= 200 && sizeDiff < 0) {
