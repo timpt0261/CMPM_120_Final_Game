@@ -33,7 +33,7 @@ class Level_02 extends Phaser.Scene {
     ).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
 
     //
-    this.enemy_1 = new Enemy_Ball(this, 100, 100, "enemy", 50, 0).setOrigin(
+    this.enemy_1 = new Enemy_Ball(this, 300, 300, "enemy", 50, 0).setOrigin(
       0.5,
       0.5
     );
