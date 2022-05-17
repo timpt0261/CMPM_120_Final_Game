@@ -22,22 +22,13 @@ class Level_01 extends Phaser.Scene {
             this.game.config.width / 2,
             this.game.config.height / 2,
             "player",
-            100,
-            1
+            60,
+            0
         ).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
 
-        //
-        this.enemy_1 = new Enemy_Ball(this, 100, 100, "enemy", 100, 0).setOrigin(
-            0.5,
-            0.5
-        );
-
-        this.physics.add.overlap(
-            this.player,
-            this.enemy_1,this.reset(),
-            null,
-            this
-        );
+        
+        this.createEnemies();
+        this.physics.add.overlap(this.player,this.enemyGroup,this.EatenOrAlive,null, this);
     }
 
 
@@ -45,6 +36,8 @@ class Level_01 extends Phaser.Scene {
     update() {
         this.player.update();
         this.enemy_1.update(this.player);
+        this.enemy_2.update(this.player);
+        
     }
 
     reset(){
@@ -54,7 +47,40 @@ class Level_01 extends Phaser.Scene {
 
     }
 
-  // createEnemies(){
+    EatenOrAlive(enemy){
+        console.log("pop");
 
-  // }
+        if(enemy.eat_or_die == true){
+            // player can consume enemy
+            this.enemyGroup.killAndHide(enemy);
+            this.player.size += this.enemy.size / 10; // change size
+
+        
+        }else{
+            // enemy can consume player
+            this.Scene.pause();
+
+        }
+
+    }
+
+    createEnemies(){
+        this.enemyGroup = this.physics.add.group();
+        
+
+        this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 50, 0).setOrigin(
+            0.5,
+            0.5
+        );
+
+        this.enemyGroup.add(this.enemy_1);
+
+        this.enemy_2 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 100, 0).setOrigin(
+            0.5,
+            0.5
+        );
+
+        this.enemyGroup.add(this.enemy_2);
+
+    }
 }
