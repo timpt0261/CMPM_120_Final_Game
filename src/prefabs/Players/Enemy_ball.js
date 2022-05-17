@@ -19,7 +19,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
     // calculates distance between player and enemy
     let dist = Phaser.Math.Distance.BetweenPoints(player, this);
     let sizeDiff = this.size - player.size;
-    console.log("enemy size : " + this.size + " Player size: " + player.size + " Diff: " + sizeDiff);
+    //console.log("enemy size : " + this.size + " Player size: " + player.size + " Diff: " + sizeDiff);
     // if dist is 400 or less player will move towards player
     if (dist <= 400 && sizeDiff >= 0) {
       console.log(dist);
