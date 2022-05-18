@@ -46,11 +46,16 @@ class Level_01 extends Phaser.Scene {
     EatenOrAlive(player,enemy){
         
         let sizeDiff = player.size - enemy.size;
-        let dist = Phaser.Math.Distance.BetweenPoints(player, this);
         if(sizeDiff > 0 ){
             // player can consume enemy
-            this.enemyGroup.killAndHide(enemy);
-            this.player.size += this.enemy.size / 10; // change size
+            this.enemyGroup.destroy(enemy);
+
+            player.body.setSize(200, 200);
+            player.body.setCircle(100);
+
+            // player.setScale(1.5);
+            // player.size += enemy.size;
+            
             
             
             this.eat.play();
