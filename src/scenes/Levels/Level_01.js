@@ -20,6 +20,8 @@ class Level_01 extends Phaser.Scene {
         // Add player
 
         this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
+        this.player.colliderWorldBounds = true;
+
         
         this.createEnemies();
 
@@ -88,6 +90,8 @@ class Level_01 extends Phaser.Scene {
         );
 
         this.enemyGroup.add(this.enemy_2);
+
+        this.enemyGroup.colliderWorldBounds = true;
 
 
     }
