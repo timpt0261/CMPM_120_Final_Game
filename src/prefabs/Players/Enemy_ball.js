@@ -47,5 +47,6 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
 
   deleteSelf() {
     // deletes it self
+    this.deleted = true;
   }
 }

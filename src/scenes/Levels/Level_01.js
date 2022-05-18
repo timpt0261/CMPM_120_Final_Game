@@ -19,6 +19,7 @@ class Level_01 extends Phaser.Scene {
 
         // Add player
 
+
         this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
         
         this.createEnemies();
@@ -41,21 +42,20 @@ class Level_01 extends Phaser.Scene {
         
     }
 
-    reset(){
-
-        // this.player.reset();
-        this.enemy_1.reset();
-
-    }
 
     EatenOrAlive(player,enemy){
         
         let sizeDiff = player.size - enemy.size;
-        let dist = Phaser.Math.Distance.BetweenPoints(player, this);
         if(sizeDiff > 0 ){
             // player can consume enemy
-            this.enemyGroup.killAndHide(enemy);
-            this.player.size += this.enemy.size / 10; // change size
+            this.enemyGroup.destroy(enemy);
+
+            player.body.setSize(200, 200);
+            player.body.setCircle(100);
+
+            // player.setScale(1.5);
+            // player.size += enemy.size;
+            
             
             
             this.eat.play();
@@ -63,7 +63,7 @@ class Level_01 extends Phaser.Scene {
         
         }else if (sizeDiff <= 0){
             // enemy can consume player
-            // game over condtions
+            // game over condtionsddddd
             console.log("pop");
             this.physics.pause();
             this.player.alpha = 0.3;
@@ -92,6 +92,8 @@ class Level_01 extends Phaser.Scene {
         );
 
         this.enemyGroup.add(this.enemy_2);
+
+        this.enemyGroup.colliderWorldBounds = true;
 
 
     }
