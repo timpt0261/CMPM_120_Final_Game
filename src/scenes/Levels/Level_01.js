@@ -19,16 +19,14 @@ class Level_01 extends Phaser.Scene {
 
         // Add player
 
-        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
+        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
         
         this.createEnemies();
 
         this.physics.add.collider(this.player, this.enemyGroup, this.EatenOrAlive, null, this);
 
         this.input.on('pointermove', (pointer) => {
-            //console.log(pointer.x,pointer.y);
-            this.mouseX = pointer.x;
-            this.mouseY = pointer.y;
+            this.mouse = pointer;
         })
 
         this.bonk = this.sound.add("wallBonk");
@@ -37,7 +35,7 @@ class Level_01 extends Phaser.Scene {
     }
 
     update(){
-        this.player.update(this.mouseX,this.mouseY);
+        this.player.update(this.mouse);
         this.enemy_1.update(this.player);
         this.enemy_2.update(this.player);
         

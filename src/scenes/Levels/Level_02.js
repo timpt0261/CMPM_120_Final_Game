@@ -29,6 +29,7 @@ class Level_02 extends Phaser.Scene {
       this.game.config.height / 2,
       "player",
       100,
+      10000,
       1
     ).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
 
@@ -48,10 +49,15 @@ class Level_02 extends Phaser.Scene {
       null,
       this
     );
+
+    this.input.on('pointermove', (pointer) => {
+      this.mouse = pointer;
+    })
+
   }
 
   update() {
-    this.player.update();
+    this.player.update(this.mouse);
     this.enemy_1.update(this.player);
   }
 
