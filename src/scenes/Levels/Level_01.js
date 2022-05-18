@@ -39,12 +39,6 @@ class Level_01 extends Phaser.Scene {
         
     }
 
-    reset(){
-
-        // this.player.reset();
-        this.enemy_1.reset();
-
-    }
 
     EatenOrAlive(player,enemy){
         
@@ -58,7 +52,7 @@ class Level_01 extends Phaser.Scene {
         
         }else if (sizeDiff <= 0){
             // enemy can consume player
-            // game over condtions
+            // game over condtionsddddd
             console.log("pop");
             this.physics.pause();
             this.player.alpha = 0.3;
