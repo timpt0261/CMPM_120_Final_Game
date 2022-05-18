@@ -21,6 +21,9 @@ class Preloader extends Phaser.Scene {
 
   createSFX() {
     // should contain all Sound effects
+    this.load.audio('wallBonk','./music/wallBonk.wav');
+    this.load.audio('eatEnemy', './music/eatEnemy.wav');
+    this.load.audio('getEaten', './music/getEaten.wav');
   }
 
   createSprite() {

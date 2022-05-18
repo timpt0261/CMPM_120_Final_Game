@@ -30,6 +30,10 @@ class Level_01 extends Phaser.Scene {
             this.mouseX = pointer.x;
             this.mouseY = pointer.y;
         })
+
+        this.bonk = this.sound.add("wallBonk");
+        this.eat = this.sound.add("eatEnemy");
+        this.getEaten = this.sound.add("getEaten");
     }
 
     update(){
@@ -54,6 +58,9 @@ class Level_01 extends Phaser.Scene {
             // player can consume enemy
             this.enemyGroup.killAndHide(enemy);
             this.player.size += this.enemy.size / 10; // change size
+            
+            
+            this.eat.play();
 
         
         }else if (sizeDiff <= 0){
@@ -62,6 +69,9 @@ class Level_01 extends Phaser.Scene {
             console.log("pop");
             this.physics.pause();
             this.player.alpha = 0.3;
+            
+            
+            this.getEaten.play();
 
         }
 
