@@ -29,7 +29,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
 
     // if dist is 400 or less player will move towards player
     if (dist <= 400 && sizeDiff >= 0) {
-      console.log(dist);
+      //console.log(dist);
       this.scene.physics.moveToObject(this, player, 2000 / this.size);
       // this.eat_or_die = true;
     } else if (dist <= 200 && sizeDiff < 0) {
