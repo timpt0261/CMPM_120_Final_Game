@@ -19,17 +19,11 @@ class Level_01 extends Phaser.Scene {
 
         // Add player
 
-        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',10,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
+        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
         
-        // 
-        this.enemy_1 = new Enemy_Ball(this, 100, 100, 'enemy',100,0).setOrigin(0.5,0.5);
+        this.createEnemies();
 
-        this.physics.add.overlap(this.player, this.enemy_1, 
-            function(enemyEatsPlayer){
-                enemyEatsPlayer.body.stop;
-                this.physics.world.removeCollider(collider);
-
-            }, null, this);
+        this.physics.add.collider(this.player, this.enemyGroup, this.EatenOrAlive, null, this);
 
         this.input.on('pointermove', (pointer) => {
             //console.log(pointer.x,pointer.y);
@@ -52,18 +46,22 @@ class Level_01 extends Phaser.Scene {
 
     }
 
-    EatenOrAlive(enemy){
-        console.log("pop");
-
-        if(enemy.eat_or_die == true){
+    EatenOrAlive(player,enemy){
+        
+        let sizeDiff = player.size - enemy.size;
+        let dist = Phaser.Math.Distance.BetweenPoints(player, this);
+        if(sizeDiff > 0 ){
             // player can consume enemy
             this.enemyGroup.killAndHide(enemy);
             this.player.size += this.enemy.size / 10; // change size
 
         
-        }else{
+        }else if (sizeDiff <= 0){
             // enemy can consume player
-            this.Scene.pause();
+            // game over condtions
+            console.log("pop");
+            this.physics.pause();
+            this.player.alpha = 0.3;
 
         }
 
@@ -80,12 +78,13 @@ class Level_01 extends Phaser.Scene {
 
         this.enemyGroup.add(this.enemy_1);
 
-        this.enemy_2 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 100, 0).setOrigin(
+        this.enemy_2 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 80, 0).setOrigin(
             0.5,
             0.5
         );
 
         this.enemyGroup.add(this.enemy_2);
+
 
     }
 }
