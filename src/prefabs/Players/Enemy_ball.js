@@ -19,28 +19,30 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     this.body.setSize(200, 200);
     this.body.setCircle(100);
     this.setScale(size / 100);
+    this.body.setColliderWorldBounds = true;
 
   }
 
-  // EatOrDie(player){
+  update(player){
+    // calculates distance between player and enemy
+    let dist = Phaser.Math.Distance.BetweenPoints(player, this);
+    // calculate diffence of size
+    let sizeDiff = this.size - player.size;
 
-  //   // calculates distance between player and enemy
-  //   let dist = Phaser.Math.Distance.BetweenPoints(player, this);
-  //   // calculate diffence of size
-  //   let sizeDiff = this.size - player.size;
+    if (dist <= 200 && sizeDiff >= 0) {
+      //console.log(dist);
+      this.scene.physics.moveToObject(this,player, 2000 / this.size);
+      // this.eat_or_die = true;
+    } else if (dist <= 200 && sizeDiff < 0) {
+      // else if the enemy is smaller and distance is 200, it will move away
+      //   player.Grow(enemy);     
+      this.scene.physics.moveToObject(this, player, -2000 / this.size);
 
-  //   // if dist is 400 or less player will move towards player
-  //   if (dist <= 200 && sizeDiff >= 0) {
-  //     //console.log(dist);
-  //     this.scene.physics.moveToObject(this, player, 2000 / this.size);
-  //     // this.eat_or_die = true;
-  //   } else if (dist <= 200 && sizeDiff < 0) {
-  //     // else if the enemy is smaller and distance is 200, it will move away
-  //     // this.scene.physics.moveToObject(this, player, -2000 / this.size);
-  //     // this.eat_or_die = false;
+      // this.eat_or_die = false;
 
-  //   }
-  // }
+    }
+    
+  }
 
   reset() {
     // add reset
