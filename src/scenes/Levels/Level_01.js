@@ -103,7 +103,7 @@ class Level_01 extends Phaser.Scene {
           //console.log(dist);
           this.physics.moveToObject(enemy, player, MAX_SPEED / enemy.size);
           // this.eat_or_die = true;
-        } else if (dist <= 100 && sizeDiff < 0) {
+        } else if (dist <= 200 && sizeDiff < 0) {
           // else if the enemy is smaller and distance is 200, it will move away
           this.physics.moveTo(enemy, enemy.x + player.x, enemy.y + player.y,  MAX_SPEED / enemy.size);
           // this.eat_or_die = false;
