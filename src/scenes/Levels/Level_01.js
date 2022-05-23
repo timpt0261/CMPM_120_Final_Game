@@ -1,9 +1,12 @@
+let MAX_SPEED = 2000;
+
 class Level_01 extends Phaser.Scene {
     constructor() {
         super("Level_01");
     }
-
-
+    
+    
+ 
     create(){
         currentScene = 1;
         // set up Phaser-provided cursor key input
@@ -37,40 +40,30 @@ class Level_01 extends Phaser.Scene {
 
     update(){
         this.player.update(this.mouse);
-        this.enemy_1.update(this.player);
-        this.enemy_2.update(this.player);
-        
+        this.EatOrDie(this.player, this.enemy_1);
     }
 
 
     EatenOrAlive(player,enemy){
         
         let sizeDiff = player.size - enemy.size;
+        console.log(sizeDiff); 
+
         if(sizeDiff > 0 ){
-            // player can consume enemy
-            this.enemyGroup.destroy(enemy);
 
-            player.body.setSize(200, 200);
-            player.body.setCircle(100);
-
-            // player.setScale(1.5);
-            // player.size += enemy.size;
-            
-            
-            
+            console.log("In eat or alive");
             this.eat.play();
+            // player can consume enemy
+  
 
+            player.Grow(enemy);
+            this.enemyGroup.destroy(enemy);
         
         }else if (sizeDiff <= 0){
-            // enemy can consume player
-            // game over condtionsddddd
-            console.log("pop");
+            this.getEaten.play();
             this.physics.pause();
             this.player.alpha = 0.3;
             
-            
-            this.getEaten.play();
-
         }
 
     }
@@ -97,4 +90,24 @@ class Level_01 extends Phaser.Scene {
 
 
     }
+
+    EatOrDie(player, enemy){
+
+        // calculates distance between player and enemy
+        let dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
+        // calculate diffence of size
+        let sizeDiff = enemy.size - player.size;
+        console.log("Player Size: %d Enemy Size: %d", player.size, enemy.size,);
+        // if dist is 400 or less player will move towards player
+        if (dist <= 200 && sizeDiff >= 0) {
+          //console.log(dist);
+          this.physics.moveToObject(enemy, player, MAX_SPEED / enemy.size);
+          // this.eat_or_die = true;
+        } else if (dist <= 100 && sizeDiff < 0) {
+          // else if the enemy is smaller and distance is 200, it will move away
+          this.physics.moveTo(enemy, enemy.x + player.x, enemy.y + player.y,  MAX_SPEED / enemy.size);
+          // this.eat_or_die = false;
+    
+        }
+      }
 }
