@@ -16,13 +16,29 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     // Maintains collides equal body
     this.body.setSize(200, 200);
     this.body.setCircle(100);
-    this.setScale(this.size/100);
+    this.setScale(this.size/200);
   }
 
   Grow(enemy){
+   
     console.log("in grow");
     this.size += enemy.size;
-    this.setScale(this.size/200);
+    let scale = this.size/200;
+    console.log("Scale: ${scale}");
+
+    this.setScale(scale);
+    
+    this.speed -= 100;  
+  }
+
+  Shrink(){
+   
+    console.log("in shrink");
+    this.size -= 20;
+    let scale = this.size/200;
+    console.log("Scale: ${scale}");
+
+    this.setScale(scale);
     
     this.speed -= 100;  
   }

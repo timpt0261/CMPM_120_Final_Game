@@ -16,8 +16,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     // Maintains collides equal body
     this.body.setSize(200, 200);
     this.body.setCircle(100);
-    this.setScale(size / 100);
-    this.body.setColliderWorldBounds = true;
+    this.setScale(size /200);
 
   }
 

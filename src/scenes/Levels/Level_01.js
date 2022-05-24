@@ -1,10 +1,12 @@
-let MAX_SPEED = 2000;
+//let MAX_SPEED = 2000;
+let speed  = 10000;
 
 class Level_01 extends Phaser.Scene {
     constructor() {
         super("Level_01");
     }
     
+   
     
  
     create(){
@@ -40,6 +42,8 @@ class Level_01 extends Phaser.Scene {
 
     update(){
         this.player.update(this.mouse);
+
+        this.physics.world.wrap(this.enemyGroup, 32);
         this.enemy_1.update(this.player);
         this.enemy_2.update(this.player);
 
@@ -77,17 +81,22 @@ class Level_01 extends Phaser.Scene {
         let dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
         // calculate diffence of size
         let sizeDiff = enemy.size - player.size;
-        console.log("Player Size: %d Enemy Size: %d", player.size, enemy.size,);
+        console.log("Player Dist: %f Size Diff: %f", player.size, enemy.size);
         // if dist is 400 or less player will move towards player
         if (dist <= 200 && sizeDiff >= 0) {
           //console.log(dist);
-          player.alpha = .3;
+          this.getEaten.play();
+          this.physics.pause();
+          this.player.alpha = 0;
+          // play death animation 
+          // launch game ove screen
 
         } else if (dist <= 200 && sizeDiff < 0) {
           // else if the enemy is smaller and distance is 200, it will move away
-          enemy.alpha = .3;
-         
+          this.eat.play();
+          // player grows 
           player.Grow(enemy);
+          // enemy is removed
           this.enemyGroup.remove(enemy, true);
     
         }
