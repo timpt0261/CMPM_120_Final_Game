@@ -82,11 +82,13 @@ class Level_01 extends Phaser.Scene {
         if (dist <= 200 && sizeDiff >= 0) {
           //console.log(dist);
           player.alpha = .3;
-      
+
         } else if (dist <= 200 && sizeDiff < 0) {
           // else if the enemy is smaller and distance is 200, it will move away
           enemy.alpha = .3;
+         
           player.Grow(enemy);
+          this.enemyGroup.remove(enemy, true);
     
         }
       }

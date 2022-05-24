@@ -10,8 +10,6 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     this.first_x = x;
     this.first_y = y;
 
-    this.eat_or_die = false; // determines if should eat or kill player
-
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
@@ -38,8 +36,6 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
       //   player.Grow(enemy);     
       this.scene.physics.moveToObject(this, player, -2000 / this.size);
 
-      // this.eat_or_die = false;
-
     }
     
   }
@@ -52,6 +48,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
 
   deleteSelf() {
     // deletes it self
-    this.deleted = true;
+    // this.setActive(false).setVisible(false);
+    this.destroy();
   }
 }
