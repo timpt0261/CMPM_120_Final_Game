@@ -106,3 +106,4 @@ class Level_01 extends Phaser.Scene {
         //create collision group between the button and player
             //callback function that calls the makes the button make the door disappear 
     }
+}
