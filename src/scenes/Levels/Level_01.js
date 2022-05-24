@@ -41,6 +41,7 @@ class Level_01 extends Phaser.Scene {
     update(){
         this.player.update(this.mouse);
         this.enemy_1.update(this.player);
+        this.enemy_2.update(this.player);
 
     }
 
@@ -85,7 +86,7 @@ class Level_01 extends Phaser.Scene {
         } else if (dist <= 200 && sizeDiff < 0) {
           // else if the enemy is smaller and distance is 200, it will move away
           enemy.alpha = .3;
-        //   player.Grow(enemy);     
+          player.Grow(enemy);
     
         }
       }
