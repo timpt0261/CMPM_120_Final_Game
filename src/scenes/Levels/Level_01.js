@@ -7,8 +7,6 @@ class Level_01 extends Phaser.Scene {
     }
     
    
-    
- 
     create(){
         currentScene = 1;
         // set up Phaser-provided cursor key input
@@ -50,12 +48,7 @@ class Level_01 extends Phaser.Scene {
     }
 
     createEnemies(){
-        this.enemyGroup = this.physics.add.group({
-
-            colliderWorldBounds : true,
-            runChildUpdate: true,
-
-        });
+        this.enemyGroup = this.physics.add.group();
         
 
         this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 50, 0).setOrigin(
@@ -86,6 +79,7 @@ class Level_01 extends Phaser.Scene {
         if (dist <= 200 && sizeDiff >= 0) {
           //console.log(dist);
           this.getEaten.play();
+
           this.physics.pause();
           this.player.alpha = 0;
           // play death animation 
