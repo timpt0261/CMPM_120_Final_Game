@@ -1,5 +1,5 @@
 // Create Enemy Ball
-class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
+class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
   constructor(scene, x, y, texture, size, frame) {
     super(scene, x, y, texture, size, frame);
 
@@ -10,33 +10,33 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
     this.first_x = x;
     this.first_y = y;
 
-    this.eat_or_die = false; // determines if should eat or kill player
-
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
     // Maintains collides equal body
-    this.body.setSize(170, 170);
-    this.body.setCircle(85);
-    this.setScale(size / 85);
+    this.body.setSize(200, 200);
+    this.body.setCircle(100);
+    this.setScale(size /200);
+
   }
 
-  update(player) {
+  update(player){
     // calculates distance between player and enemy
     let dist = Phaser.Math.Distance.BetweenPoints(player, this);
     // calculate diffence of size
     let sizeDiff = this.size - player.size;
 
-    // if dist is 400 or less player will move towards player
-    if (dist <= 400 && sizeDiff >= 0) {
+    if (dist <= 500 && sizeDiff >= 0) {
       //console.log(dist);
-      this.scene.physics.moveToObject(this, player, 2000 / this.size);
+      this.scene.physics.moveToObject(this,player, 2000 / this.size);
       // this.eat_or_die = true;
-    } else if (dist <= 200 && sizeDiff < 0) {
+    } else if (dist <= 500 && sizeDiff < 0) {
       // else if the enemy is smaller and distance is 200, it will move away
+      //   player.Grow(enemy);     
       this.scene.physics.moveToObject(this, player, -2000 / this.size);
-      // this.eat_or_die = false;
+
     }
+    
   }
 
   reset() {
@@ -47,6 +47,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite {
 
   deleteSelf() {
     // deletes it self
-    this.deleted = true;
+    // this.setActive(false).setVisible(false);
+    this.destroy();
   }
 }
