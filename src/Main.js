@@ -6,7 +6,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 900,
     height: 640,
-    scene: [Preloader ,Level_01,Level_02,Level_03],
+    scene: [Preloader ,Level_01,Level_02,Level_03, Level_04],
     title: 'Title In progress',
 
     physics: {
@@ -30,6 +30,7 @@ let sceneSwitcher = (event) => {
             game.scene.bringToTop('Level_01');
             game.scene.pause('Level_02');
             game.scene.pause('Level_03');
+            game.scene.pause('Level_04');
 
             break;
         case '2':
@@ -38,6 +39,7 @@ let sceneSwitcher = (event) => {
             game.scene.bringToTop('Level_02');
             game.scene.pause('Level_01');
             game.scene.pause('Level_03');
+            game.scene.pause('Level_04');
 
             break;
         case '3':
@@ -46,6 +48,16 @@ let sceneSwitcher = (event) => {
             game.scene.bringToTop('Level_03');
             game.scene.pause('Level_01');
             game.scene.pause('Level_02');
+            game.scene.pause('Level_04');
+
+            break;
+        case '4':
+            console.log("In scene 4\n");
+            game.scene.start('Level_04');
+            game.scene.bringToTop('Level_04');
+            game.scene.pause('Level_01');
+            game.scene.pause('Level_02');
+            game.scene.pause('Level_03');
 
             break;
         default:

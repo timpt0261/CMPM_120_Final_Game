@@ -40,6 +40,12 @@ class Preloader extends Phaser.Scene {
       frameWidth: 200,
       frameHeight: 200,
     });
+
+    // this.load.spritesheet("testTiles", "art/TestTileSet.png", {
+    //   frameWidth: 10,
+    //   frameHeight: 10
+    // });
+    // this.load.tilemapTiledJSON("level_4_map", "art/testlvl.json");    // Tiled JSON file
   }
 
   create() {
