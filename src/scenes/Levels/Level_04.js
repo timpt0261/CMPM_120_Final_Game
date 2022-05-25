@@ -44,6 +44,7 @@ class Level_04 extends Phaser.Scene {
             console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
         }
 
+        console.log(this.p1Size);
         this.player = new Player(this, p1Spawn.x, p1Spawn.y, "player", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
         // The player acts like a square?
         this.physics.add.collider(this.player, wallLayer);
