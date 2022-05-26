@@ -16,6 +16,8 @@ let config = {
             debug: true
         }
     }
+
+    
 }
 
 let game = new Phaser.Game(config);
@@ -63,5 +65,37 @@ let sceneSwitcher = (event) => {
         default:
             break;
     }
+
 }
+
+let EatOrDie = function (player, enemy){
+
+    // calculates distance between player and enemy
+    let dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
+    // calculate diffence of size
+    let sizeDiff = enemy.size - player.size;
+    console.log("Player Dist: %f Size Diff: %f", player.size, enemy.size);
+    // if dist is 400 or less player will move towards player
+    if (dist <= 200 && sizeDiff >= 0) {
+        //console.log(dist);
+        this.getEaten.play();
+
+        this.physics.pause();
+        this.player.alpha = 0;
+        // play death animation 
+        // launch game ove screen
+
+    } else if (dist <= 200 && sizeDiff < 0) {
+        // else if the enemy is smaller and distance is 200, it will move away
+        this.eat.play();
+        // player grows 
+        player.Grow(enemy);
+        // enemy is removed
+        this.enemyGroup.remove(enemy, true);
+
+    }
+}
+
+
+
 

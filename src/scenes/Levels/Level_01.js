@@ -27,7 +27,7 @@ class Level_01 extends Phaser.Scene {
         this.createEnemies();
 
 
-        this.physics.add.collider(this.player, this.enemyGroup, this.EatOrDie, null, this);
+        this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
 
 
         this.input.on('pointermove', (pointer) => {
@@ -68,33 +68,6 @@ class Level_01 extends Phaser.Scene {
 
     }
 
-    EatOrDie(player, enemy){
-
-        // calculates distance between player and enemy
-        let dist = Phaser.Math.Distance.BetweenPoints(player, enemy);
-        // calculate diffence of size
-        let sizeDiff = enemy.size - player.size;
-        console.log("Player Dist: %f Size Diff: %f", player.size, enemy.size);
-        // if dist is 400 or less player will move towards player
-        if (dist <= 200 && sizeDiff >= 0) {
-          //console.log(dist);
-          this.getEaten.play();
-
-          this.physics.pause();
-          this.player.alpha = 0;
-          // play death animation 
-          // launch game ove screen
-
-        } else if (dist <= 200 && sizeDiff < 0) {
-          // else if the enemy is smaller and distance is 200, it will move away
-          this.eat.play();
-          // player grows 
-          player.Grow(enemy);
-          // enemy is removed
-          this.enemyGroup.remove(enemy, true);
-    
-        }
-      }
     createObstacles(){
         //create door
         this.redDoor = new Door(this, 60, 60, "redDoor", 0).setOrigin(0,0);
