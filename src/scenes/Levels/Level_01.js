@@ -11,6 +11,9 @@ class Level_01 extends Phaser.Scene {
         currentScene = 1;
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
+        
+        let keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keySpace.on("keydown", )
 
         // set up Scene switcher
         this.input.keyboard.on("keydown", sceneSwitcher);

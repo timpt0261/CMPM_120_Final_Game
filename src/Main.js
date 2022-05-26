@@ -68,6 +68,7 @@ let sceneSwitcher = (event) => {
 
 }
 
+
 let EatOrDie = function (player, enemy){
 
     // calculates distance between player and enemy
@@ -88,13 +89,17 @@ let EatOrDie = function (player, enemy){
     } else if (dist <= 200 && sizeDiff < 0) {
         // else if the enemy is smaller and distance is 200, it will move away
         this.eat.play();
-        // player grows 
-        player.Grow(enemy);
+        // player grows/ shrinks depedding on mode
+        player.Mode(0 ,enemy);
         // enemy is removed
         this.enemyGroup.remove(enemy, true);
 
     }
 }
+
+
+
+  
 
 
 
