@@ -238,13 +238,13 @@
    </properties>
    <point/>
   </object>
-  <object id="2" name="enemySpawn" x="125" y="191">
+  <object id="2" name="enemySpawn1" x="125" y="191">
    <properties>
     <property name="size" type="int" value="40"/>
    </properties>
    <point/>
   </object>
-  <object id="3" name="enemySpawn" x="797" y="335">
+  <object id="3" name="enemySpawn2" x="797" y="335">
    <properties>
     <property name="size" type="int" value="80"/>
    </properties>
