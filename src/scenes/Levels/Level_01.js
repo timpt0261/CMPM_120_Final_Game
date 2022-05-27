@@ -47,13 +47,10 @@ class Level_01 extends Phaser.Scene {
         this.enemy_2.update(this.player);
     }
 
-    createEnemies(num , spawn_x = game.config.height - 100, spawn_y = game.config.width - 100, spawnSizeMin = 50, spawnSizeMax = 80){
+    createEnemies(){
         this.enemyGroup = this.physics.add.group();
+        Phaser.Math.Between(spawnSizeMin, spawnSizeMax);
         
-        for (let index = 0; index < num; index++) {
-            
-            
-        }
 
         this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50,spawn_x), Phaser.Math.Between(50, spawn_y), "enemy", 50, 0).setOrigin(
             0.5,
