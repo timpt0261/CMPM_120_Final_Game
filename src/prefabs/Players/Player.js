@@ -19,11 +19,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setScale(this.size/200);
   }
 
-  Mode(num){
-   num == 0 ? num = 1 : num = 0;
-
-   return num;
- }
 
   Grow(enemy){
    

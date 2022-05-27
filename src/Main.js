@@ -68,6 +68,7 @@ let sceneSwitcher = (event) => {
 
 }
 
+let mode = 1;
 
 let EatOrDie = function (player, enemy){
 
@@ -90,7 +91,7 @@ let EatOrDie = function (player, enemy){
         // else if the enemy is smaller and distance is 200, it will move away
         this.eat.play();
         // player grows/ shrinks depedding on mode
-        player.Mode(0 ,enemy);
+        mode == 1 ? player.Grow(enemy): player.Shrink(enemy);
         // enemy is removed
         this.enemyGroup.remove(enemy, true);
 

@@ -11,9 +11,6 @@ class Level_01 extends Phaser.Scene {
         currentScene = 1;
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
-        
-        let keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keySpace.on("keydown", )
 
         // set up Scene switcher
         this.input.keyboard.on("keydown", sceneSwitcher);
@@ -36,6 +33,12 @@ class Level_01 extends Phaser.Scene {
         this.input.on('pointermove', (pointer) => {
             this.mouse = pointer;
         })
+
+        this.input.on('pointerdown', (pointer) =>{
+            mode == 0 ? mode = 1 : mode = 0;
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
 
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
