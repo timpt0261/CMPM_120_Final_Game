@@ -68,6 +68,7 @@ class Level_04 extends Phaser.Scene {
     }
 
     update(){
+
         //Update player
         this.player.update(this.mouse);
 

@@ -24,7 +24,7 @@ class Level_01 extends Phaser.Scene {
         this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
 
         // Add enemies
-        this.createEnemies();
+        this.createEnemies(2);
 
 
         this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
@@ -33,6 +33,12 @@ class Level_01 extends Phaser.Scene {
         this.input.on('pointermove', (pointer) => {
             this.mouse = pointer;
         })
+
+        this.input.on('pointerdown', (pointer) =>{
+            mode == 0 ? mode = 1 : mode = 0;
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
 
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
@@ -47,11 +53,15 @@ class Level_01 extends Phaser.Scene {
         this.enemy_2.update(this.player);
     }
 
-    createEnemies(){
+    createEnemies(num , spawn_x = game.config.height - 100, spawn_y = game.config.width - 100, spawnSizeMin = 50, spawnSizeMax = 80){
         this.enemyGroup = this.physics.add.group();
         
+        for (let index = 0; index < num; index++) {
+            
+            
+        }
 
-        this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 50, 0).setOrigin(
+        this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50,spawn_x), Phaser.Math.Between(50, spawn_y), "enemy", 50, 0).setOrigin(
             0.5,
             0.5
         );
