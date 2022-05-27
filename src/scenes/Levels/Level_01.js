@@ -34,6 +34,12 @@ class Level_01 extends Phaser.Scene {
             this.mouse = pointer;
         })
 
+        this.input.on('pointerdown', (pointer) =>{
+            mode == 0 ? mode = 1 : mode = 0;
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
+
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");

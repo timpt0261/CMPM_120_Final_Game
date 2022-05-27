@@ -258,7 +258,7 @@
                 {
                  "height":0,
                  "id":2,
-                 "name":"enemySpawn",
+                 "name":"enemySpawn1",
                  "point":true,
                  "properties":[
                         {
@@ -276,7 +276,7 @@
                 {
                  "height":0,
                  "id":3,
-                 "name":"enemySpawn",
+                 "name":"enemySpawn2",
                  "point":true,
                  "properties":[
                         {
