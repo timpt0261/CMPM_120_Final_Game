@@ -14,7 +14,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     // Maintains collides equal body
-    this.body.setSize(200, 200);
+    //this.body.setSize(200, 200);
     this.body.setCircle(100);
     this.setScale(this.size/200);
   }
@@ -51,15 +51,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       //Distance between mouse and edge of player
       let dist = Phaser.Math.Distance.Between(mouse.x,mouse.y, this.x,this.y) - this.size;
 
-      //Have a soft deadzone of 40, hard deadzone at 20
-      if(dist > 40){
+      //Have a soft deadzone of 30, hard deadzone at 10
+      if(dist > 30){
         this.scene.physics.moveToObject(this, mouse, this.speed / this.size);
       }
-      // Slow the player progressivly if they are less than 40 distance away until stopping at 20
+      // Slow the player progressivly if they are less than 30 distance away until stopping at 10
       else if(dist > 20){ 
-        this.slow =  20 -(dist % 20);
-        this.slow = ((this.slow /10)+1);
-        // console.log(dist, this.slow);
+        this.slow =  20 -(dist % 10);
+        this.slow = ((this.slow /10));
+        //console.log(dist, this.slow);
+        this.scene.physics.moveToObject(this, mouse, this.speed / (this.size * (this.slow)));
+      }
+      else if(dist > 10){ 
+        this.slow =  10 -(dist % 10);
+        this.slow = ((this.slow /10)+2);
+        //console.log(dist, this.slow);
         this.scene.physics.moveToObject(this, mouse, this.speed / (this.size * (this.slow)));
       }
       else{
