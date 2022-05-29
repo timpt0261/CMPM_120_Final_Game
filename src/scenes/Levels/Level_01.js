@@ -24,7 +24,7 @@ class Level_01 extends Phaser.Scene {
         this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
 
         // Add enemies
-        this.createEnemies(2);
+        this.createEnemies();
 
 
         this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
@@ -53,22 +53,19 @@ class Level_01 extends Phaser.Scene {
         this.enemy_2.update(this.player);
     }
 
-    createEnemies(num , spawn_x = game.config.height - 100, spawn_y = game.config.width - 100, spawnSizeMin = 50, spawnSizeMax = 80){
+    createEnemies(){
         this.enemyGroup = this.physics.add.group();
-        
-        for (let index = 0; index < num; index++) {
-            
-            
-        }
+        let spawn_x =  Phaser.Math.Between(50,game.config.width - 100)
+        let spawn_y = Phaser.Math.Between(50, game.config.height - 100);
 
-        this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50,spawn_x), Phaser.Math.Between(50, spawn_y), "enemy", 50, 0).setOrigin(
+        this.enemy_1 = new Enemy_Ball(this,spawn_x ,spawn_y , "enemy", 50, 0).setOrigin(
             0.5,
             0.5
         );
 
         this.enemyGroup.add(this.enemy_1);
 
-        this.enemy_2 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 80, 0).setOrigin(
+        this.enemy_2 = new Enemy_Ball(this,spawn_x, spawn_y, "enemy", 80, 0).setOrigin(
             0.5,
             0.5
         );
