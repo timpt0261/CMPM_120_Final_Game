@@ -12,8 +12,14 @@ class Preloader extends Phaser.Scene {
     this.load.image("blue_background", "art/blue_background.png");
     this.load.image("green_background", "art/green_background.png");
 
+    this.load.image("red_picnic", "art/pie_background_1.png");
+
+    this.load.image("red_pie", "art/pie_red.png");
+    
     this.load.image('redDoor', './art/door_red.png');
     this.load.image('redButton', './art/button_red.png');
+
+
 
     // this.load.image("player", "art/player.png");
     this.load.image("enemy", "art/enemy.png");
@@ -49,6 +55,6 @@ class Preloader extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("Level_01");
+    this.scene.start("start_screenScene");
   }
 }
