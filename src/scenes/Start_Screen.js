@@ -11,13 +11,23 @@ class Start_Screen extends Phaser.Scene {
 
         this.anims.create({
             key : "start",
-            frames: this.anims.generateFrameNumbers('opening_animation', { start: 0, end: -1 }),
+            frames: this.anims.generateFrameNumbers('opening_animation', { start: 0, end: 14 }),
             frameRate :7,
         
         });
 
+        this.anims.create({
+            key: 'loop',
+            frames: this.anims.generateFrameNumbers('opening_animation', { start: 14, end: -1 }),
+            frameRate: 7,
+            repeat: -1,
+            yoyo : true,
+        })
+
         let open_anims =this.add.sprite(game.config.width/2,game.config.height/2, 'opening_animation');
 
-        open_anims.play('start');
+        open_anims.play('loop');
+
+        // open_anims.play('loop');
     }
 }
