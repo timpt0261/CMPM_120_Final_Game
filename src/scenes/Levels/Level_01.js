@@ -54,6 +54,15 @@ class Level_01 extends Phaser.Scene {
     }
 
     createEnemies(){
+
+        this.anims.create({
+            key: "donut",
+            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
+            frameRate: 7,
+            repeat: -1,
+
+        });
+
         this.enemyGroup = this.physics.add.group();
         let spawn_x =  Phaser.Math.Between(50,game.config.width - 100)
         let spawn_y = Phaser.Math.Between(50, game.config.height - 100);

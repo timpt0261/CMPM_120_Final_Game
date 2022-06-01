@@ -20,10 +20,6 @@ class Preloader extends Phaser.Scene {
     this.load.image('redDoor', './art/door_red.png');
     this.load.image('redButton', './art/button_red.png');
 
-
-
-    
-
     this.createSprite();
     this.createSFX();
   }
@@ -37,10 +33,10 @@ class Preloader extends Phaser.Scene {
 
   createSprite() {
     // load spritesheet for player
-    // this.load.spritesheet("enemy", "art/player.png", {
-    //   frameWidth: 44,
-    //   frameHeight: 44,
-    // });
+    this.load.spritesheet("enemy", "art/enemy.png", {
+      frameWidth: 44,
+      frameHeight: 44,
+    });
 
     this.load.spritesheet("bubble", "art/bubble_effect.png", {
       frameWidth: 200,

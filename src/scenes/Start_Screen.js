@@ -28,7 +28,7 @@ class Start_Screen extends Phaser.Scene {
 
         open_anims.play('start');
 
-        let play = this.add.image(100, 100, 'play_btn');
+        let play = this.add.image(800, 400, 'play_btn').setScale(.35);
         play.setInteractive().on('pointerdown', ()=>{
             this.scene.start("Level_01")
         })
