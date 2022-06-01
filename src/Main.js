@@ -26,7 +26,7 @@ let game = new Phaser.Game(config);
 let sceneSwitcher = (event) => {
     //console.log("Key is: " + event.key);
     switch (event.key) {
-        case 0:
+        case '0':
             game.scene.start("start_screenScene");
             game.scene.bringToTop("start_screenScene");
             game.scene.pause('Level_01');
