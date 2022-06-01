@@ -242,11 +242,6 @@
                          "name":"size",
                          "type":"int",
                          "value":50
-                        }, 
-                        {
-                         "name":"test",
-                         "type":"string",
-                         "value":"This is a biggie test"
                         }],
                  "rotation":0,
                  "type":"",
@@ -298,7 +293,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":26,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",
