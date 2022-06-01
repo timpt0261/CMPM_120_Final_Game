@@ -47,6 +47,11 @@ class Preloader extends Phaser.Scene {
       frameHeight: 200,
     });
 
+    this.load.spritesheet("opening_animation","art/opening_animation.png",{
+      frameWidth: 900,
+      frameHeight: 640,
+    });
+
     // this.load.spritesheet("testTiles", "art/TestTileSet.png", {
     //   frameWidth: 10,
     //   frameHeight: 10
