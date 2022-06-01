@@ -19,6 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setScale(this.size/200);
   }
 
+
   Grow(enemy){
    
     console.log("in grow");
@@ -31,16 +32,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.speed -= 100;  
   }
 
-  Shrink(){
+  Shrink(enemy){
    
     console.log("in shrink");
-    this.size -= 20;
+    this.size -= enemy.size;
     let scale = this.size/200;
     console.log("Scale: ${scale}");
 
     this.setScale(scale);
     
-    this.speed -= 100;  
+    this.speed += 100;  
   }
 
 

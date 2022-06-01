@@ -34,6 +34,12 @@ class Level_01 extends Phaser.Scene {
             this.mouse = pointer;
         })
 
+        this.input.on('pointerdown', (pointer) =>{
+            mode == 0 ? mode = 1 : mode = 0;
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
+
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");
@@ -49,16 +55,17 @@ class Level_01 extends Phaser.Scene {
 
     createEnemies(){
         this.enemyGroup = this.physics.add.group();
-        
+        let spawn_x =  Phaser.Math.Between(50,game.config.width - 100)
+        let spawn_y = Phaser.Math.Between(50, game.config.height - 100);
 
-        this.enemy_1 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 50, 0).setOrigin(
+        this.enemy_1 = new Enemy_Ball(this,spawn_x ,spawn_y , "enemy", 50, 0).setOrigin(
             0.5,
             0.5
         );
 
         this.enemyGroup.add(this.enemy_1);
 
-        this.enemy_2 = new Enemy_Ball(this, Phaser.Math.Between(50, game.config.width - 100), Phaser.Math.Between(50, game.config.height - 100), "enemy", 80, 0).setOrigin(
+        this.enemy_2 = new Enemy_Ball(this,spawn_x, spawn_y, "enemy", 80, 0).setOrigin(
             0.5,
             0.5
         );
