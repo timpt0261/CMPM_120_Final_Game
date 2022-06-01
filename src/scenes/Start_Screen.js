@@ -26,7 +26,15 @@ class Start_Screen extends Phaser.Scene {
 
         let open_anims =this.add.sprite(game.config.width/2,game.config.height/2, 'opening_animation');
 
-        open_anims.play('loop');
+        open_anims.play('start');
+
+        let play = this.add.image(100, 100, 'play_btn');
+        play.setInteractive().on('pointerdown', ()=>{
+            this.scene.start("Level_01")
+        })
+
+
+
 
         // open_anims.play('loop');
     }

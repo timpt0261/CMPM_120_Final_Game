@@ -12,17 +12,17 @@ class Preloader extends Phaser.Scene {
     this.load.image("blue_background", "art/blue_background.png");
     this.load.image("green_background", "art/green_background.png");
 
+    this.load.image("play_btn", "art/play_button.png");
     this.load.image("red_picnic", "art/pie_background_1.png");
 
-    this.load.image("red_pie", "art/pie_red.png");
+    this.load.image("player", "art/pie_red.png");
     
     this.load.image('redDoor', './art/door_red.png');
     this.load.image('redButton', './art/button_red.png');
 
 
 
-    // this.load.image("player", "art/player.png");
-    this.load.image("enemy", "art/enemy.png");
+    
 
     this.createSprite();
     this.createSFX();
@@ -37,10 +37,10 @@ class Preloader extends Phaser.Scene {
 
   createSprite() {
     // load spritesheet for player
-    this.load.spritesheet("player", "art/player.png", {
-      frameWidth: 200,
-      frameHeight: 200,
-    });
+    // this.load.spritesheet("enemy", "art/player.png", {
+    //   frameWidth: 44,
+    //   frameHeight: 44,
+    // });
 
     this.load.spritesheet("bubble", "art/bubble_effect.png", {
       frameWidth: 200,
