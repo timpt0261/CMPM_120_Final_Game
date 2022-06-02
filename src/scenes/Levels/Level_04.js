@@ -15,6 +15,27 @@ class Level_04 extends Phaser.Scene {
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");
+
+        // animations
+        this.anims.create({
+            key : 'pie_flip',
+            frames: [
+                {key : 'pie_blue'},
+                {key : 'pie_red', duration: .5}
+            ],
+            frameRate: 7,
+            repeat: 3
+        });
+
+        // this.anims.create({
+        //     key : 'pie_flip_to_blue',
+        //     frames: [
+        //         {key : 'pie_red'},
+        //         {key : 'pie_blue', duration: .5}
+        //     ],
+        //     frameRate: 7,
+        //     repeat: 3
+        // });
         
         // Set up tiles
         const map = this.make.tilemap({key: 'level_4_map'});
@@ -37,6 +58,7 @@ class Level_04 extends Phaser.Scene {
             collides: true
         });
 
+        
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
@@ -52,7 +74,7 @@ class Level_04 extends Phaser.Scene {
             }            
             //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
         }
-        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
+        // this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
 
         this.player;
         this.createPlayer(map);
@@ -110,7 +132,20 @@ class Level_04 extends Phaser.Scene {
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
             this.mouse = pointer;
-        })
+        });
+
+        this.input.on('pointerdown', (pointer) =>{
+            if(mode == 0){
+                mode = 1;
+                this.player.setTexture('pie_red');
+            }
+            else{
+                mode = 0;
+                this.player.setTexture('pie_blue');
+            }
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
     }
 
     update(){
@@ -133,7 +168,7 @@ class Level_04 extends Phaser.Scene {
             }            
             //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
         }
-        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "player", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
+        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 0).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
     }
 
     createEnemies(map){
