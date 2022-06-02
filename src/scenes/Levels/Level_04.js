@@ -131,8 +131,24 @@ class Level_04 extends Phaser.Scene {
 
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
+            var distX = Phaser.Math.Distance.Between(this.player.x,0, game.config.width /2 , 0);
+            var distY = Phaser.Math.Distance.Between(0,this.player.y, 0, game.config.height/2);
+
+            if(this.player.x > game.config.width /2){
+                pointer.x += distX;
+            }
+            else{
+                pointer.x -= distX;
+            }
+            if(this.player.y > game.config.height /2){
+                pointer.y += distY;
+            }
+            else{
+                pointer.y -= distY;
+            }
             this.mouse = pointer;
-        });
+        })
+        this.cameras.main.startFollow(this.player);
 
         this.input.on('pointerdown', (pointer) =>{
             if(mode == 0){
@@ -149,6 +165,7 @@ class Level_04 extends Phaser.Scene {
     }
 
     update(){
+        //console.log(this.mouse.x, this.mouse.y,this.player.x, this.player.y);
         //Update player
         this.player.update(this.mouse);
 
@@ -157,6 +174,7 @@ class Level_04 extends Phaser.Scene {
             let enemy = this.enemyGroup.children.entries[i];
             enemy.update(this.player);
         }
+
     }
 
     createPlayer(map){

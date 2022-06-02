@@ -13,6 +13,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
+
     // Maintains collides equal body
     //this.body.setSize(200, 200);
     this.body.setCircle(100);
@@ -54,6 +55,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   update(mouse) {
     // Check if mouse is undefined
     if (mouse){  
+      var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.x, this.y, mouse.x, mouse.y);
+      this.setAngle(angle);
+
       //Distance between mouse and edge of player
       let dist = Phaser.Math.Distance.Between(mouse.x,mouse.y, this.x,this.y) - this.size / 2;
       //console.log(dist);
