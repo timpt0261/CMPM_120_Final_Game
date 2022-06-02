@@ -4,6 +4,10 @@ class Level_04 extends Phaser.Scene {
     }
 
     preload(){
+        this.load.spritesheet("tile_sheet", "assets/art/TestTileSet.png",{
+            frameWidth: 10,
+            frameHeight: 10
+        });
         this.load.image('tiles', 'assets/art/TestTileSet.png');
         this.load.tilemapTiledJSON("level_4_map", "assets/art/testlvl.json");    // Tiled JSON file
     }    
@@ -26,32 +30,72 @@ class Level_04 extends Phaser.Scene {
 
         // Set up the Tiled Layers
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+        const redDoorLayer = map.createLayer("RedDoor", tileset, 0, 0);
+        const yellowDoorLayer = map.createLayer("YellowDoor", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
 
         // Set any properties from any layers
         wallLayer.setCollisionByProperty({
             collides: true
         });
+        redDoorLayer.setCollisionByProperty({
+            collides: true
+        });
+        yellowDoorLayer.setCollisionByProperty({
+            collides: true
+        });
+
+
+        // Add objects
+        this.buttonGroup = this.physics.add.group();
+        this.createObjects(map);
 
         // adds the player
-        const p1Spawn = map.findObject("Objects", obj => obj.name === "playerSpawn");
-        this.p1Size;
-        for(let i = 0; i < p1Spawn.properties.length; i += 1){
-            if(p1Spawn.properties[i].name == 'size'){
-                this.p1Size = p1Spawn.properties[i].value;
-            }            
-            //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
-        }
-        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "player", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
+        this.player;
+        this.createPlayer(map);
         
         // Add enemies
         this.enemyGroup = this.physics.add.group();
-        this.createEnemies(map);
+        this.createEnemies(map);      
+        
 
         // The player acts like a square?
-        this.physics.add.collider(this.player, wallLayer);
+        var redPlayerCollider = this.physics.add.collider(this.player, redDoorLayer);
+        var yellowPlayerCollider = this.physics.add.collider(this.player, yellowDoorLayer);
+        var redEnemyCollider = this.physics.add.collider(this.enemyGroup, redDoorLayer);
+        var yellowEnemyCollider = this.physics.add.collider(this.enemyGroup, yellowDoorLayer);
+        this.physics.add.collider(this.player, wallLayer);        
         this.physics.add.collider(this.enemyGroup, wallLayer);
         this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
+
+        this.physics.add.overlap(this.player, this.buttonGroup, (player, button) =>{
+            if(button.pressed == true){
+                return;
+            }
+            else if(button.pressed == false){
+                button.pressed = true;
+            }
+            
+            if(button.color == "yellow"){
+                this.physics.world.removeCollider(yellowPlayerCollider);
+                this.physics.world.removeCollider(yellowEnemyCollider);
+                yellowDoorLayer.forEachTile(tile =>{
+                    if(tile.index != -1){
+                        tile.alpha = 0.2;
+                    }
+                });
+            }
+            if(button.color == "red"){
+                this.physics.world.removeCollider(redPlayerCollider);
+                this.physics.world.removeCollider(redEnemyCollider);
+                redDoorLayer.forEachTile(tile =>{
+                    if(tile.index != -1){
+                        tile.alpha = 0.2;
+                    }
+                });
+            }
+        });
+
 
         // Check the collision of the layers. [wallLayer]
         const debugGraphics = this.add.graphics().setAlpha(0.6);
@@ -68,7 +112,6 @@ class Level_04 extends Phaser.Scene {
     }
 
     update(){
-
         //Update player
         this.player.update(this.mouse);
 
@@ -77,6 +120,18 @@ class Level_04 extends Phaser.Scene {
             let enemy = this.enemyGroup.children.entries[i];
             enemy.update(this.player);
         }
+    }
+
+    createPlayer(map){
+        const p1Spawn = map.findObject("Objects", obj => obj.name === "playerSpawn");
+        this.p1Size;
+        for(let i = 0; i < p1Spawn.properties.length; i += 1){
+            if(p1Spawn.properties[i].name == 'size'){
+                this.p1Size = p1Spawn.properties[i].value;
+            }            
+            //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
+        }
+        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "player", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
     }
 
     createEnemies(map){
@@ -102,6 +157,34 @@ class Level_04 extends Phaser.Scene {
 
             var enemy = new Enemy_Ball(this, enemySpawn.x, enemySpawn.y, "enemy", enemySize, 0).setOrigin(0.5,0.5);
             this.enemyGroup.add(enemy);
+        }
+    }
+
+    createObjects(map){
+        var buttonName = '';
+        var buttonColor = '';
+        var buttonSize = 1;
+        var i = 0;
+        // adds the buttons
+        while(true){
+            i += 1;
+            buttonName = "buttonSpawn" + i;
+            var buttonSpawn = map.findObject("Objects", obj => obj.name === buttonName);
+
+            if(!buttonSpawn){
+                break;
+            }
+            for(let i = 0; i < buttonSpawn.properties.length; i += 1){
+                if(buttonSpawn.properties[i].name == 'door'){
+                    buttonColor = buttonSpawn.properties[i].value;
+                }         
+                if(buttonSpawn.properties[i].name == 'size'){
+                    buttonSize = buttonSpawn.properties[i].value;
+                }   
+            }
+
+            var button = new Button(this, buttonSpawn.x, buttonSpawn.y, "tiles",buttonSize, buttonColor, 0);
+            this.buttonGroup.add(button);
         }
     }
 }
