@@ -94,15 +94,20 @@ let EatOrDie = function (player, enemy){
         this.getEaten.play();
 
         this.physics.pause();
-        this.player.alpha = 0;
+        player.alpha = 0;
         // play death animation 
         // launch game ove screen
 
     } else if (dist <= 200 && sizeDiff < 0) {
         // else if the enemy is smaller and distance is 200, it will move away
         this.eat.play();
-        // player grows/ shrinks depedding on mode
-        mode == 1 ? player.Grow(enemy): player.Shrink(enemy);
+        if(mode == 1){
+            player.Grow(enemy);
+
+        }else{
+            player.Shrink(enemy);
+            
+        }
         // enemy is removed
         this.enemyGroup.remove(enemy, true);
 

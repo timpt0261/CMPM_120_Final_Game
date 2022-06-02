@@ -1,16 +1,8 @@
 class Level_04 extends Phaser.Scene {
     constructor() {
         super("Level_04");
+         
     }
-
-    preload(){
-        this.load.spritesheet("tile_sheet", "assets/art/TestTileSet.png",{
-            frameWidth: 10,
-            frameHeight: 10
-        });
-        this.load.image('tiles', 'assets/art/TestTileSet.png');
-        this.load.tilemapTiledJSON("level_4_map", "assets/art/testlvl.json");    // Tiled JSON file
-    }    
 
     create(){
         // set up Phaser-provided cursor key input        
@@ -23,6 +15,27 @@ class Level_04 extends Phaser.Scene {
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");
+
+        // animations
+        this.anims.create({
+            key : 'pie_flip',
+            frames: [
+                {key : 'pie_blue'},
+                {key : 'pie_red', duration: .5}
+            ],
+            frameRate: 7,
+            repeat: 3
+        });
+
+        // this.anims.create({
+        //     key : 'pie_flip_to_blue',
+        //     frames: [
+        //         {key : 'pie_red'},
+        //         {key : 'pie_blue', duration: .5}
+        //     ],
+        //     frameRate: 7,
+        //     repeat: 3
+        // });
         
         // Set up tiles
         const map = this.make.tilemap({key: 'level_4_map'});
@@ -45,12 +58,24 @@ class Level_04 extends Phaser.Scene {
             collides: true
         });
 
+        
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
         this.createObjects(map);
 
         // adds the player
+        
+	const p1Spawn = map.findObject("Objects", obj => obj.name === "playerSpawn");
+        this.p1Size;
+        for(let i = 0; i < p1Spawn.properties.length; i += 1){
+            if(p1Spawn.properties[i].name == 'size'){
+                this.p1Size = p1Spawn.properties[i].value;
+            }            
+            //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
+        }
+        // this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
+
         this.player;
         this.createPlayer(map);
         
@@ -96,7 +121,6 @@ class Level_04 extends Phaser.Scene {
             }
         });
 
-
         // Check the collision of the layers. [wallLayer]
         const debugGraphics = this.add.graphics().setAlpha(0.6);
         wallLayer.renderDebug(debugGraphics, {
@@ -125,6 +149,19 @@ class Level_04 extends Phaser.Scene {
             this.mouse = pointer;
         })
         this.cameras.main.startFollow(this.player);
+
+        this.input.on('pointerdown', (pointer) =>{
+            if(mode == 0){
+                mode = 1;
+                this.player.setTexture('pie_red');
+            }
+            else{
+                mode = 0;
+                this.player.setTexture('pie_blue');
+            }
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
     }
 
     update(){
@@ -149,7 +186,7 @@ class Level_04 extends Phaser.Scene {
             }            
             //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
         }
-        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "player", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
+        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 0).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
     }
 
     createEnemies(map){
