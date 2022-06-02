@@ -19,13 +19,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.setScale(this.size/200);
   }
 
+  createAnims(){
+    
+  }
 
   Grow(enemy){
    
     console.log("in grow");
+    // this.play('pie_flip');
     this.size += enemy.size;
     let scale = this.size/200;
-    console.log("Scale: ${scale}");
+    console.log("size : %d", this.size);
+   
 
     this.setScale(scale);
     
@@ -35,9 +40,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   Shrink(enemy){
    
     console.log("in shrink");
+    // this.play('pie_flip');
     this.size -= enemy.size;
     let scale = this.size/200;
-    console.log("Scale: ${scale}");
+    console.log("size : %d", this.size);    
 
     this.setScale(scale);
     

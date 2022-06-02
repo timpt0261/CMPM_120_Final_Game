@@ -12,17 +12,19 @@ class Level_01 extends Phaser.Scene {
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
 
+        
+
         // set up Scene switcher
         this.input.keyboard.on("keydown", sceneSwitcher);
 
         // Add background color
-        this.add.tileSprite(0, 0, game.config.height, game.config.width, "red_background")
+        this.add.tileSprite(0, 0, game.config.height, game.config.width, "red_checker")
             .setOrigin(0, 0)
             .setScale(2);
 
-        // Add player
-        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
-
+        // Add pie_red
+        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'pie_red',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
+        // this.player.play('pie_flip');
         // Add enemies
         this.createEnemies();
 
