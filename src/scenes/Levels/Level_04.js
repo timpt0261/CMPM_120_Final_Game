@@ -2,16 +2,7 @@ class Level_04 extends Phaser.Scene {
     constructor() {
         super("Level_04");
     }
-
-    preload(){
-        // this.load.spritesheet("testTiles", "assets/art/TestTileSet.png", {
-        //     frameWidth: 10,
-        //     frameHeight: 10
-        //   });
-        this.load.image('tiles', 'assets/art/TestTileSet.png');
-        this.load.tilemapTiledJSON("level_4_map", "assets/art/testlvl.json");    // Tiled JSON file
-      
-    }    
+ 
 
     create(){
         // set up Phaser-provided cursor key input        
@@ -42,7 +33,7 @@ class Level_04 extends Phaser.Scene {
             }            
             //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
         }
-        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "player", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
+        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
         
         // Add enemies
         this.enemyGroup = this.physics.add.group();
@@ -51,7 +42,7 @@ class Level_04 extends Phaser.Scene {
         // The player acts like a square?
         this.physics.add.collider(this.player, wallLayer);
         this.physics.add.collider(this.enemyGroup, wallLayer);
-        this.physics.add.collider(this.player, this.enemyGroup, this.EatOrDie, null, this);
+        this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
 
         // Check the collision of the layers. [wallLayer]
         const debugGraphics = this.add.graphics().setAlpha(0.6);

@@ -7,7 +7,8 @@ class Start_Screen extends Phaser.Scene {
     create(){
         console.log("In start screen");
         currentScene = 0;
-        // let background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_picnic').setOrgin(0,0);
+        this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_checker');
+        this.background.setOrigin(0,0);
 
         this.anims.create({
             key : "start",
