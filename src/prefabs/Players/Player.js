@@ -62,7 +62,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     // Check if mouse is undefined
     if (mouse){  
       //Distance between mouse and edge of player
-      let dist = Phaser.Math.Distance.Between(mouse.x,mouse.y, this.x,this.y) - this.size;
+      let dist = Phaser.Math.Distance.Between(mouse.x,mouse.y, this.x,this.y) - this.size / 2;
+      //console.log(dist);
 
       //Have a soft deadzone of 30, hard deadzone at 10
       if(dist > 30){
