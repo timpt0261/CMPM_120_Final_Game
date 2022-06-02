@@ -9,7 +9,6 @@ class Preloader extends Phaser.Scene {
     // Should contain all assets
     this.createCharAndInt();
     this.createUI();
-
     this.createBackground();   
     this.createSprite();
     this.createSFX();
@@ -28,6 +27,9 @@ class Preloader extends Phaser.Scene {
     
     this.load.image('redDoor', 'door_red.png');
     this.load.image('redButton', 'button_red.png');
+    this.load.image('blueButton', 'button_blue.png');
+    this.load.image('greenButton', 'button_green.png');
+    this.load.image('pinkButton', 'button_pink');
 
   }
   createSFX() {
