@@ -101,13 +101,13 @@ let EatOrDie = function (player, enemy){
     } else if (dist <= 200 && sizeDiff < 0) {
         // else if the enemy is smaller and distance is 200, it will move away
         this.eat.play();
-        // player grows/ shrinks depedding on mode
-        // if(mode == 1){
-        //     player.Grow(enemy);
-        // }else{
-        //     player.Shrink(enemy);
-        // }
-        mode == 1 ? player.Grow(enemy): player.Shrink(enemy);
+        if(mode == 1){
+            player.Grow(enemy);
+
+        }else{
+            player.Shrink(enemy);
+            
+        }
         // enemy is removed
         this.enemyGroup.remove(enemy, true);
 

@@ -13,7 +13,7 @@ class Start_Screen extends Phaser.Scene {
         this.input.keyboard.on("keydown", sceneSwitcher);
 
         
-        // let background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_picnic').setOrgin(0,0);
+        this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_checker').setOrigin(0);
 
         this.anims.create({
             key : "start",
