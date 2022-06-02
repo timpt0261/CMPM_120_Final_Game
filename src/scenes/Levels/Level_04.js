@@ -26,16 +26,6 @@ class Level_04 extends Phaser.Scene {
             frameRate: 7,
             repeat: 3
         });
-
-        // this.anims.create({
-        //     key : 'pie_flip_to_blue',
-        //     frames: [
-        //         {key : 'pie_red'},
-        //         {key : 'pie_blue', duration: .5}
-        //     ],
-        //     frameRate: 7,
-        //     repeat: 3
-        // });
         
         // Set up tiles
         const map = this.make.tilemap({key: 'level_4_map'});
