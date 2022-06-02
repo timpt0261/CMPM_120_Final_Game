@@ -12,12 +12,12 @@ class Level_03 extends Phaser.Scene {
     this.input.keyboard.on("keydown", sceneSwitcher);
 
     // Add background color
-    this.add.tileSprite(0, 0, game.config.height, game.config.width, "green_background")
+    this.add.tileSprite(0, 0, game.config.height, game.config.width, "blue_checker_lg")
         .setOrigin(0, 0)
         .setScale(2);
 
     // Add player
-    this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'player',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
+    this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'pie_red',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
 
     // Add enemies
     this.createEnemies();

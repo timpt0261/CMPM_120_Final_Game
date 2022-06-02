@@ -5,54 +5,73 @@ class Preloader extends Phaser.Scene {
   }
 
   preload() {
-    this.load.path = "assets/";
-
+   
     // Should contain all assets
-    this.load.image("red_background", "art/red_background.png");
-    this.load.image("blue_background", "art/blue_background.png");
-    this.load.image("green_background", "art/green_background.png");
+    this.createCharAndInt();
+    this.createUI();
 
-    this.load.image("play_btn", "art/play_button.png");
-    this.load.image("red_picnic", "art/pie_background_1.png");
-
-    this.load.image("player", "art/pie_red.png");
-    
-    this.load.image('redDoor', './art/door_red.png');
-    this.load.image('redButton', './art/button_red.png');
-
+    this.createBackground();   
     this.createSprite();
     this.createSFX();
+    this.createJSON();
   }
 
+  createUI(){
+    this.load.path = "assets/art/UI/";
+    this.load.image("play_btn", "play_button.png");
+  }
+  createCharAndInt(){
+    this.load.path = "assets/art/Characters_Interactables/";
+
+    this.load.image("pie_red", "pie_red.png");
+    this.load.image("pie_blue", "pie_blue.png");
+    
+    this.load.image('redDoor', 'door_red.png');
+    this.load.image('redButton', 'button_red.png');
+
+  }
   createSFX() {
+    this.load.path = "assets";
     // should contain all Sound effects
-    this.load.audio('wallBonk','./music/wallBonk.wav');
-    this.load.audio('eatEnemy', './music/eatEnemy.wav');
-    this.load.audio('getEaten', './music/getEaten.wav');
+    this.load.audio('wallBonk','/music/wallBonk.wav');
+    this.load.audio('eatEnemy', '/music/eatEnemy.wav');
+    this.load.audio('getEaten', '/music/getEaten.wav');
+  }
+
+  createBackground(){
+    this.load.path = "assets/art/Background/";
+    this.load.image("blue_checker_sm", "checker_background_1.png");
+    this.load.image("blue_checker_lg", "checker_background_2.png");
+    this.load.image("red_checker", "pie_background_1.png");
+    this.load.image("yellow_checker", "pie_background_2.png");
+
   }
 
   createSprite() {
+    this.load.path = "assets/art/Animations/";
     // load spritesheet for player
-    this.load.spritesheet("enemy", "art/enemy.png", {
-      frameWidth: 44,
-      frameHeight: 44,
-    });
 
-    this.load.spritesheet("bubble", "art/bubble_effect.png", {
+    this.load.spritesheet("enemy", "doughnut_enemy.png", {
       frameWidth: 200,
       frameHeight: 200,
     });
 
-    this.load.spritesheet("opening_animation","art/opening_animation.png",{
+    this.load.spritesheet("bubble", "bubble_effect.png", {
+      frameWidth: 200,
+      frameHeight: 200,
+    });
+
+    this.load.spritesheet("opening_animation","opening_animation.png",{
       frameWidth: 900,
       frameHeight: 640,
     });
 
-    // this.load.spritesheet("testTiles", "art/TestTileSet.png", {
-    //   frameWidth: 10,
-    //   frameHeight: 10
-    // });
-    // this.load.tilemapTiledJSON("level_4_map", "art/testlvl.json");    // Tiled JSON file
+  }
+
+  createJSON(){
+    this.load.path = "assets/art/Levels/";
+    this.load.image('tiles', 'TestTileSet.png');
+    this.load.tilemapTiledJSON("level_4_map", "testlvl.json");   
   }
 
   create() {
