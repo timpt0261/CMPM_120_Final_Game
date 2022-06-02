@@ -33,9 +33,9 @@ class Preloader extends Phaser.Scene {
 
   createSprite() {
     // load spritesheet for player
-    this.load.spritesheet("enemy", "art/enemy.png", {
-      frameWidth: 44,
-      frameHeight: 44,
+    this.load.spritesheet("enemy", "art/doughnut_enemy.png", {
+      frameWidth: 200,
+      frameHeight: 200,
     });
 
     this.load.spritesheet("bubble", "art/bubble_effect.png", {
