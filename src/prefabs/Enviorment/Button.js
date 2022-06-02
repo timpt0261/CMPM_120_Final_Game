@@ -1,19 +1,25 @@
-// Create Main_Ball prefab
+// Create Button prefab
 class Button extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, frame, Door) {
-      super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, size, color, frame) {
+      super(scene, x, y, texture, size, color, frame);
+  
+      this.scene = scene; // global variables to be used in other functions
+      this.first_x = x;
+      this.first_y = y;
+      this.scene = scene;
+      this.size = size;
+      this.color = color;
+      this.pressed = false;
   
       scene.add.existing(this);
       scene.physics.add.existing(this);
-      
-      //add Physics:
-      this.body.setSize(32,32);
-      this.body.setCircle(16);
+  
+      // Maintains collides equal body
+      //this.body.setSize(200, 200);
+      this.body.setCircle();
+      this.setScale(this.size/50);
     }
-  
-  
-    signalDoor(){
-        // calls the Door function to make it deactivate it's rigidbody
+
+    update(){
     }
-  }
-  
+}
