@@ -6,9 +6,9 @@ class Level_01 extends Phaser.Scene {
     }
 
     create(){
-        // set up Phaser-provided cursor key input        
-        // set up Scene switcher
+
         currentScene = 1;
+        // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown", sceneSwitcher);
 
@@ -123,6 +123,23 @@ class Level_01 extends Phaser.Scene {
         //     collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
         //     faceColor: new Phaser.Display.Color(40, 39, 37,255)
         // });
+
+        // Add pause and reset buttons
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5);
+        this.pause.setInteractive().on('pointerdown',()=>{
+            if(this.isPaused == false){
+                this.physics.pause();
+                this.isPaused = true;
+            }else{
+                this.physics.resume();
+                this.isPaused = false;
+            }
+        }, this);
+
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5);
+        this.reset.setInteractive().on('pointerdown',()=>{
+            this.scene.restart();
+        }, this);
 
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
