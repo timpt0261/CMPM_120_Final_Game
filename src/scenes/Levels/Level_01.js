@@ -125,7 +125,7 @@ class Level_01 extends Phaser.Scene {
         // });
 
         // Add pause and reset buttons
-        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5);
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5).setScrollFactor(0);
         this.pause.setInteractive().on('pointerdown',()=>{
             if(this.isPaused == false){
                 this.physics.pause();
@@ -136,7 +136,7 @@ class Level_01 extends Phaser.Scene {
             }
         }, this);
 
-        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5);
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5).setScrollFactor(0);
         this.reset.setInteractive().on('pointerdown',()=>{
             this.scene.restart();
         }, this);
@@ -161,6 +161,7 @@ class Level_01 extends Phaser.Scene {
             }
             this.mouse = pointer;
         })
+
         this.cameras.main.startFollow(this.player);
 
         this.input.on('pointerdown', (pointer) =>{
@@ -174,18 +175,6 @@ class Level_01 extends Phaser.Scene {
             }
             mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
         });
-
-        this.pause = this.add.sprite(game.config.width - 40,60, 'pause').setOrigin(.5,.5);
-        this.pause.setInteractive().on('pointerdown',()=>{
-            if(this.isPaused == false){
-                this.physics.pause();
-                this.isPaused = true;
-            }else{
-                this.physics.resume();
-                this.isPaused = false;
-            } 
-        }, this);
-
     }
 
     update(){
