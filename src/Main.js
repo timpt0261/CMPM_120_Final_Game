@@ -95,6 +95,7 @@ let EatOrDie = function (player, enemy){
 
         this.physics.pause();
         player.alpha = 0;
+        this.scene.restart();
         // play death animation 
         // launch game ove screen
 
