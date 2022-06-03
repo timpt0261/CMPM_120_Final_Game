@@ -34,7 +34,8 @@ class Level_04 extends Phaser.Scene {
         // Set up the Tiled Layers
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
         const redDoorLayer = map.createLayer("RedDoor", tileset, 0, 0);
-        const yellowDoorLayer = map.createLayer("YellowDoor", tileset, 0, 0);
+        const greenDoorLayer = map.createLayer("GreenDoor", tileset, 0, 0);
+        const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
 
         // Set any properties from any layers
@@ -44,7 +45,10 @@ class Level_04 extends Phaser.Scene {
         redDoorLayer.setCollisionByProperty({
             collides: true
         });
-        yellowDoorLayer.setCollisionByProperty({
+        greenDoorLayer.setCollisionByProperty({
+            collides: true
+        });
+        blueDoorLayer.setCollisionByProperty({
             collides: true
         });
 
@@ -55,17 +59,6 @@ class Level_04 extends Phaser.Scene {
         this.createObjects(map);
 
         // adds the player
-        
-	const p1Spawn = map.findObject("Objects", obj => obj.name === "playerSpawn");
-        this.p1Size;
-        for(let i = 0; i < p1Spawn.properties.length; i += 1){
-            if(p1Spawn.properties[i].name == 'size'){
-                this.p1Size = p1Spawn.properties[i].value;
-            }            
-            //console.log(p1Spawn.properties[i].name , p1Spawn.properties[i].value);
-        }
-        // this.player = new Player(this, p1Spawn.x, p1Spawn.y, "pie_red", this.p1Size, 10000, 1).setOrigin(0.5, 0.5); //Origin default is (0.5,0.5)
-
         this.player;
         this.createPlayer(map);
         
@@ -76,9 +69,12 @@ class Level_04 extends Phaser.Scene {
 
         // The player acts like a square?
         var redPlayerCollider = this.physics.add.collider(this.player, redDoorLayer);
-        var yellowPlayerCollider = this.physics.add.collider(this.player, yellowDoorLayer);
+        var greenPlayerCollider = this.physics.add.collider(this.player, greenDoorLayer);
+        var bluePlayerCollider = this.physics.add.collider(this.player, blueDoorLayer);
         var redEnemyCollider = this.physics.add.collider(this.enemyGroup, redDoorLayer);
-        var yellowEnemyCollider = this.physics.add.collider(this.enemyGroup, yellowDoorLayer);
+        var greenEnemyCollider = this.physics.add.collider(this.enemyGroup, greenDoorLayer);
+        var blueEnemyCollider = this.physics.add.collider(this.enemyGroup, blueDoorLayer);
+
         this.physics.add.collider(this.player, wallLayer);        
         this.physics.add.collider(this.enemyGroup, wallLayer);
         this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
@@ -91,10 +87,19 @@ class Level_04 extends Phaser.Scene {
                 button.pressed = true;
             }
             
-            if(button.color == "yellow"){
-                this.physics.world.removeCollider(yellowPlayerCollider);
-                this.physics.world.removeCollider(yellowEnemyCollider);
-                yellowDoorLayer.forEachTile(tile =>{
+            if(button.color == "green"){
+                this.physics.world.removeCollider(greenPlayerCollider);
+                this.physics.world.removeCollider(greenEnemyCollider);
+                greenDoorLayer.forEachTile(tile =>{
+                    if(tile.index != -1){
+                        tile.alpha = 0.2;
+                    }
+                });
+            }
+            if(button.color == "blue"){
+                this.physics.world.removeCollider(bluePlayerCollider);
+                this.physics.world.removeCollider(blueEnemyCollider);
+                blueDoorLayer.forEachTile(tile =>{
                     if(tile.index != -1){
                         tile.alpha = 0.2;
                     }
