@@ -124,6 +124,7 @@ class Level_04 extends Phaser.Scene {
             var distX = Phaser.Math.Distance.Between(this.player.x,0, game.config.width /2 , 0);
             var distY = Phaser.Math.Distance.Between(0,this.player.y, 0, game.config.height/2);
 
+            //Commenting this entire block would remove a CLICK bug. Perhaps move phase switching to spacebar or middle mouse?
             if(this.player.x > game.config.width /2){
                 pointer.x += distX;
             }
@@ -150,7 +151,6 @@ class Level_04 extends Phaser.Scene {
                 this.player.setTexture('pie_blue');
             }
             mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
-            
         });
     }
 

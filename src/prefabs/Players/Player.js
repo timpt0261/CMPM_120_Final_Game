@@ -9,6 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene = scene;
     this.size = size;
     this.speed = speed;
+    this.speedMax = 400;
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -35,7 +36,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setScale(scale);
     
-    this.speed -= 100;  
   }
 
   Shrink(enemy){
@@ -48,13 +48,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setScale(scale);
     
-    this.speed += 100;  
   }
 
 
   update(mouse) {
     // Check if mouse is undefined
     if (mouse){  
+      //console.log(mouse.x, mouse.y);
       var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.x, this.y, mouse.x, mouse.y);
       this.setAngle(angle);
 
@@ -64,24 +64,39 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
       //Have a soft deadzone of 30, hard deadzone at 10
       if(dist > 30){
-        this.scene.physics.moveToObject(this, mouse, this.speed / this.size);
+        if(this.speed / this.size >= this.speedMax){
+          this.scene.physics.moveToObject(this, mouse, this.speedMax);
+        }
+        else{
+          this.scene.physics.moveToObject(this, mouse, this.speed / this.size);
+        }
       }
       // Slow the player progressivly if they are less than 30 distance away until stopping at 10
       else if(dist > 20){ 
         this.slow =  20 -(dist % 10);
         this.slow = ((this.slow /10));
-        //console.log(dist, this.slow);
-        this.scene.physics.moveToObject(this, mouse, this.speed / (this.size * (this.slow)));
+        if(this.speed /(this.size * this.slow) >= this.speedMax){
+          this.scene.physics.moveToObject(this, mouse, this.speedMax);
+        }
+        else{
+          this.scene.physics.moveToObject(this, mouse, this.speed / (this.size * (this.slow)));
+        }
       }
       else if(dist > 10){ 
         this.slow =  10 -(dist % 10);
         this.slow = ((this.slow /10)+2);
         //console.log(dist, this.slow);
-        this.scene.physics.moveToObject(this, mouse, this.speed / (this.size * (this.slow)));
+        if(this.speed /(this.size * this.slow) >= this.speedMax){
+          this.scene.physics.moveToObject(this, mouse, this.speedMax);
+        }
+        else{
+          this.scene.physics.moveToObject(this, mouse, this.speed / (this.size * (this.slow)));
+        }
       }
       else{
-        this.scene.physics.moveToObject(this, mouse, 0 / this.size);
+        this.scene.physics.moveToObject(this, mouse, 0);
       }
+      console.log(this.speed / this.size);
     }
 
   }
