@@ -41,6 +41,13 @@ class Level_01 extends Phaser.Scene {
 
         this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5);
         this.pause.setInteractive().on('pointerdown',()=>{
+            if(this.isPaused == false){
+                this.physics.pause();
+                this.isPaused = true;
+            }else{
+                this.physics.resume();
+                this.isPaused = false;
+            }
             
         }, this);
 
