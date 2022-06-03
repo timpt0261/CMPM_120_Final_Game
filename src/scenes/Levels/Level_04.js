@@ -147,11 +147,7 @@ class Level_04 extends Phaser.Scene {
             else{
                 pointer.y -= distY;
             }
-
-            //pointer.x -= distX;
-            //pointer.y -= distY;
             this.mouse = pointer;
-            //console.log(pointer.x, pointer.y);
         })
         this.cameras.main.startFollow(this.player);
 
