@@ -45,7 +45,6 @@ class Level_01 extends Phaser.Scene {
         //     collides: true
         // });
 
-
         // button animations
         // this.anims.create({
         //     key: "blue_pressed",
@@ -64,6 +63,7 @@ class Level_01 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
             frameRate: 12,
         });
+
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
