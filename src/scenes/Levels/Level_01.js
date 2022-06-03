@@ -4,6 +4,7 @@ let speed  = 10000;
 class Level_01 extends Phaser.Scene {
     constructor() {
         super("Level_01");
+        this.isPaused = false;
     }
     
    
@@ -11,8 +12,6 @@ class Level_01 extends Phaser.Scene {
         currentScene = 1;
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
-
-        
 
         // set up Scene switcher
         this.input.keyboard.on("keydown", sceneSwitcher);
@@ -41,6 +40,19 @@ class Level_01 extends Phaser.Scene {
             mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
             
         });
+
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5);
+        this.pause.setInteractive().on('pointerdown',()=>{
+            
+        }, this);
+
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5);
+        this.reset.setInteractive().on('pointerdown',()=>{
+            this.scene.restart();
+        }, this);
+
+       
+
 
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
