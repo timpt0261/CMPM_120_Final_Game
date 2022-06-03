@@ -6,9 +6,9 @@ class Level_01 extends Phaser.Scene {
     }
 
     create(){
-        // set up Phaser-provided cursor key input        
-        // set up Scene switcher
+
         currentScene = 1;
+        // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown", sceneSwitcher);
 
@@ -26,7 +26,7 @@ class Level_01 extends Phaser.Scene {
 
         // Set up the Tiled Layers
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
-        //const redDoorLayer = map.createLayer("RedDoor", tileset, 0, 0);
+        //const pinkDoorLayer = map.createLayer("PinkDoor", tileset, 0, 0);
         const greenDoorLayer = map.createLayer("GreenDoor", tileset, 0, 0);
         //const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
@@ -62,10 +62,10 @@ class Level_01 extends Phaser.Scene {
         
 
         // The player acts like a square?
-        //var redPlayerCollider = this.physics.add.collider(this.player, redDoorLayer);
+        //var pinkPlayerCollider = this.physics.add.collider(this.player, pinkDoorLayer);
         var greenPlayerCollider = this.physics.add.collider(this.player, greenDoorLayer);
         //var bluePlayerCollider = this.physics.add.collider(this.player, blueDoorLayer);
-        //var redEnemyCollider = this.physics.add.collider(this.enemyGroup, redDoorLayer);
+        //var pinkEnemyCollider = this.physics.add.collider(this.enemyGroup, pinkDoorLayer);
         var greenEnemyCollider = this.physics.add.collider(this.enemyGroup, greenDoorLayer);
         //var blueEnemyCollider = this.physics.add.collider(this.enemyGroup, blueDoorLayer);
 
@@ -105,10 +105,10 @@ class Level_01 extends Phaser.Scene {
                     }
                 });
             }
-            if(button.color == "red"){
-                this.physics.world.removeCollider(redPlayerCollider);
-                this.physics.world.removeCollider(redEnemyCollider);
-                redDoorLayer.forEachTile(tile =>{
+            if(button.color == "pink"){
+                this.physics.world.removeCollider(pinkPlayerCollider);
+                this.physics.world.removeCollider(pinkEnemyCollider);
+                pinkDoorLayer.forEachTile(tile =>{
                     if(tile.index != -1){
                         tile.alpha = 0.2;
                     }
@@ -123,6 +123,23 @@ class Level_01 extends Phaser.Scene {
         //     collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
         //     faceColor: new Phaser.Display.Color(40, 39, 37,255)
         // });
+
+        // Add pause and reset buttons
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5).setScrollFactor(0);
+        this.pause.setInteractive().on('pointerdown',()=>{
+            if(this.isPaused == false){
+                this.physics.pause();
+                this.isPaused = true;
+            }else{
+                this.physics.resume();
+                this.isPaused = false;
+            }
+        }, this);
+
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5).setScrollFactor(0);
+        this.reset.setInteractive().on('pointerdown',()=>{
+            this.scene.restart();
+        }, this);
 
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
@@ -144,6 +161,7 @@ class Level_01 extends Phaser.Scene {
             }
             this.mouse = pointer;
         })
+
         this.cameras.main.startFollow(this.player);
 
         this.input.on('pointerdown', (pointer) =>{
@@ -157,18 +175,6 @@ class Level_01 extends Phaser.Scene {
             }
             mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
         });
-
-        this.pause = this.add.sprite(game.config.width - 40,60, 'pause').setOrigin(.5,.5);
-        this.pause.setInteractive().on('pointerdown',()=>{
-            if(this.isPaused == false){
-                this.physics.pause();
-                this.isPaused = true;
-            }else{
-                this.physics.resume();
-                this.isPaused = false;
-            } 
-        }, this);
-
     }
 
     update(){
