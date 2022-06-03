@@ -1,17 +1,57 @@
 class Level_01 extends Phaser.Scene {
     constructor() {
         super("Level_01");
-         
+        this.isPaused = false;
     }
 
     create(){
-        // set up Phaser-provided cursor key input        
+        currentScene = 1;
+        // set up Phaser-provided cursor key input
+        cursors = this.input.keyboard.createCursorKeys();
+
         // set up Scene switcher
         currentScene = 1;
         cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown", sceneSwitcher);
 
-        //sounds
+        // Add background color
+        this.add.tileSprite(0, 0, game.config.height, game.config.width, "red_checker")
+            .setOrigin(0, 0)
+            .setScale(2);
+
+        // Add pie_red
+        this.player = new Player(this, this.game.config.width / 2 , this.game.config.height / 2,'pie_red',70, 10000,1).setOrigin(0.5,0.5);  //Origin default is (0.5,0.5)
+        // this.player.play('pie_flip');
+        // Add enemies
+        this.createEnemies();
+
+
+        this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
+
+
+        this.input.on('pointermove', (pointer) => {
+            this.mouse = pointer;
+        })
+
+        this.input.on('pointerdown', (pointer) =>{
+            mode == 0 ? mode = 1 : mode = 0;
+            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            
+        });
+
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5);
+        this.pause.setInteractive().on('pointerdown',()=>{
+            
+        }, this);
+
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5);
+        this.reset.setInteractive().on('pointerdown',()=>{
+            this.scene.restart();
+        }, this);
+
+       
+
+
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");

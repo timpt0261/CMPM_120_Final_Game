@@ -18,6 +18,8 @@ class Preloader extends Phaser.Scene {
   createUI(){
     this.load.path = "assets/art/UI/";
     this.load.image("play_btn", "play_button.png");
+    this.load.image("pause", "pause.png");
+    this.load.image("restart", "restart.png");
   }
   createCharAndInt(){
     this.load.path = "assets/art/Characters_Interactables/";
