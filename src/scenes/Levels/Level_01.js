@@ -36,7 +36,7 @@ class Level_01 extends Phaser.Scene {
 
         // Set up the Tiled Layers
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
-        //const redDoorLayer = map.createLayer("RedDoor", tileset, 0, 0);
+        //const pinkDoorLayer = map.createLayer("PinkDoor", tileset, 0, 0);
         const greenDoorLayer = map.createLayer("GreenDoor", tileset, 0, 0);
         //const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
@@ -72,10 +72,10 @@ class Level_01 extends Phaser.Scene {
         
 
         // The player acts like a square?
-        //var redPlayerCollider = this.physics.add.collider(this.player, redDoorLayer);
+        //var pinkPlayerCollider = this.physics.add.collider(this.player, pinkDoorLayer);
         var greenPlayerCollider = this.physics.add.collider(this.player, greenDoorLayer);
         //var bluePlayerCollider = this.physics.add.collider(this.player, blueDoorLayer);
-        //var redEnemyCollider = this.physics.add.collider(this.enemyGroup, redDoorLayer);
+        //var pinkEnemyCollider = this.physics.add.collider(this.enemyGroup, pinkDoorLayer);
         var greenEnemyCollider = this.physics.add.collider(this.enemyGroup, greenDoorLayer);
         //var blueEnemyCollider = this.physics.add.collider(this.enemyGroup, blueDoorLayer);
 
@@ -115,10 +115,10 @@ class Level_01 extends Phaser.Scene {
                     }
                 });
             }
-            if(button.color == "red"){
-                this.physics.world.removeCollider(redPlayerCollider);
-                this.physics.world.removeCollider(redEnemyCollider);
-                redDoorLayer.forEachTile(tile =>{
+            if(button.color == "pink"){
+                this.physics.world.removeCollider(pinkPlayerCollider);
+                this.physics.world.removeCollider(pinkEnemyCollider);
+                pinkDoorLayer.forEachTile(tile =>{
                     if(tile.index != -1){
                         tile.alpha = 0.2;
                     }
