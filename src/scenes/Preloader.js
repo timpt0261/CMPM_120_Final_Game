@@ -25,11 +25,22 @@ class Preloader extends Phaser.Scene {
     this.load.image("pie_red", "pie_red.png");
     this.load.image("pie_blue", "pie_blue.png");
     
+    this.load.image("win_flag", "win_flag.png");
+
     this.load.image('redDoor', 'door_red.png');
     this.load.image('redButton', 'button_red.png');
-    this.load.image('blueButton', 'button_blue.png');
-    this.load.image('greenButton', 'button_green.png');
-    this.load.image('pinkButton', 'button_pink');
+    this.load.spritesheet('blueButton', 'button_blue.png',{
+      frameWidth: 20,
+      frameHeight: 20
+    });
+    this.load.spritesheet('greenButton', 'button_green.png',{
+      frameWidth: 20,
+      frameHeight: 20
+    });
+    this.load.spritesheet('pinkButton', 'button_pink.png',{
+      frameWidth: 20,
+      frameHeight: 20
+    });
 
   }
   createSFX() {
@@ -73,6 +84,9 @@ class Preloader extends Phaser.Scene {
   createJSON(){
     this.load.path = "assets/art/Levels/";
     this.load.image('tiles', 'TestTileSet.png');
+    this.load.image('tileset', 'TileSet.png');
+    
+    this.load.tilemapTiledJSON("level_1_map", "level1.json");   
     this.load.tilemapTiledJSON("level_4_map", "testlvl.json");   
   }
 
