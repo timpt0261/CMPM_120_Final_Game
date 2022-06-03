@@ -2,7 +2,7 @@
 class Level_01 extends Phaser.Scene {
     constructor() {
         super("Level_01");
-         
+         this.isPaused = false;
     }
 
     create(){
@@ -16,17 +16,6 @@ class Level_01 extends Phaser.Scene {
         this.bonk = this.sound.add("wallBonk");
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");
-
-        // animations
-        this.anims.create({
-            key : 'pie_flip',
-            frames: [
-                {key : 'pie_blue'},
-                {key : 'pie_red', duration: .5}
-            ],
-            frameRate: 7,
-            repeat: 3
-        });
 
         //Background void
         this.background = this.add.tileSprite(0,0,game.config.width*3, game.config.height*3, 'yellow_checker').setOrigin(0.5,0.5);
