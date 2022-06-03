@@ -17,7 +17,7 @@ class Button extends Phaser.Physics.Arcade.Sprite {
       // Maintains collides equal body
       //this.body.setSize(200, 200);
       this.body.setCircle();
-      this.setScale(this.size/50);
+      this.setScale(this.size/20);
     }
 
     update(){

@@ -1,7 +1,7 @@
 // Create Enemy Ball
 class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
-  constructor(scene, x, y, texture, size, frame) {
-    super(scene, x, y, texture, size, frame);
+  constructor(scene, x, y, texture, size,speed, frame) {
+    super(scene, x, y, texture, size, speed, frame);
 
     this.setColliderWorldBounds = true;
 
@@ -9,6 +9,8 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     this.size = size;
     this.first_x = x;
     this.first_y = y;
+    this.speed = speed;
+
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -26,15 +28,27 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     // calculate diffence of size
     let sizeDiff = this.size - player.size;
 
-    if (dist <= 500 && sizeDiff >= 0) {
-      //console.log(dist);
-      this.scene.physics.moveToObject(this,player, 2000 / this.size);
-      // this.eat_or_die = true;
-    } else if (dist <= 500 && sizeDiff < 0) {
-      // else if the enemy is smaller and distance is 200, it will move away
-      //   player.Grow(enemy);     
-      this.scene.physics.moveToObject(this, player, -2000 / this.size);
-
+    if(this.speed != -1){
+      if (dist <= 500 && sizeDiff >= 0) {
+        //console.log(dist);
+        this.scene.physics.moveToObject(this,player, this.speed);
+        // this.eat_or_die = true;
+      } else if (dist <= 500 && sizeDiff < 0) {
+        // else if the enemy is smaller and distance is 200, it will move away
+        //   player.Grow(enemy);     
+        this.scene.physics.moveToObject(this, player, -this.speed);
+      }
+    }
+    else{
+      if (dist <= 500 && sizeDiff >= 0) {
+        //console.log(dist);
+        this.scene.physics.moveToObject(this,player, 2000 / this.size);
+        // this.eat_or_die = true;
+      } else if (dist <= 500 && sizeDiff < 0) {
+        // else if the enemy is smaller and distance is 200, it will move away
+        //   player.Grow(enemy);     
+        this.scene.physics.moveToObject(this, player, -2000 / this.size);
+      }
     }
     
   }
