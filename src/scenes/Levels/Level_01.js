@@ -45,7 +45,25 @@ class Level_01 extends Phaser.Scene {
         //     collides: true
         // });
 
-        
+
+        // button animations
+        // this.anims.create({
+        //     key: "blue_pressed",
+        //     frames: this.anims.generateFrameNumbers('blueButton', { start: 0, end: -1 }),
+        //     frameRate: 12,
+        // });
+
+        // this.anims.create({
+        //     key: "pink_pressed",
+        //     frames: this.anims.generateFrameNumbers('pinkButton', { start: 0, end: -1 }),
+        //     frameRate: 12,
+        // });
+
+        this.anims.create({
+            key: "green_pressed",
+            frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
@@ -85,6 +103,7 @@ class Level_01 extends Phaser.Scene {
             else if(button.pressed == false){
                 button.pressed = true;
                 this.eat.play();
+               
             }
             
             if(button.color == "green"){
@@ -95,6 +114,7 @@ class Level_01 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("green_pressed");
             }
             if(button.color == "blue"){
                 this.physics.world.removeCollider(bluePlayerCollider);
@@ -104,6 +124,7 @@ class Level_01 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                // button.play("blue_pressed");
             }
             if(button.color == "pink"){
                 this.physics.world.removeCollider(pinkPlayerCollider);
@@ -113,6 +134,7 @@ class Level_01 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                // button.play("pink_pressed");
             }
         });
 
