@@ -25,6 +25,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   Grow(enemy){
+    console.log(enemy);
    
     console.log("in grow");
     // this.play('pie_flip');
@@ -95,7 +96,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       else{
         this.scene.physics.moveToObject(this, mouse, 0);
       }
-      console.log(this.speed / this.size);
     }
 
   }
