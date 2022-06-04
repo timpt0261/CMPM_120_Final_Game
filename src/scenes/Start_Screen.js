@@ -12,6 +12,17 @@ class Start_Screen extends Phaser.Scene {
         // set up Scene switcher
         this.input.keyboard.on("keydown", sceneSwitcher);
 
+
+        // Music
+        this.musicConfig = {
+            mute: 0,
+            volume: 1,
+            seek: 0,
+            loop: true,
+            delay: 0
+        };
+        this.bgMusic = this.sound.add("bgMusic");
+
         
         this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_checker').setOrigin(0);
 
@@ -36,6 +47,7 @@ class Start_Screen extends Phaser.Scene {
 
         let play = this.add.image(800, 400, 'play_btn').setScale(.35);
         play.setInteractive().on('pointerdown', ()=>{
+            this.bgMusic.play(this.musicConfig);
             this.scene.start("Level_01")
         })
 

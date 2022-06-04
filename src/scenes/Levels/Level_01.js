@@ -72,6 +72,7 @@ class Level_01 extends Phaser.Scene {
 
         // adds the player
         this.player;
+        mode = 1;
         this.createPlayer(map);
         
         // Add enemies
@@ -227,11 +228,11 @@ class Level_01 extends Phaser.Scene {
     createEnemies(map){
         var enemyName = '';
         var enemySize = 1;
-        var enemySpeed = -1;
         var i = 0;
 
         // adds the enemies
-        while(true){
+        while(true){        
+            var enemySpeed = -1;
             i += 1;
             enemyName = "enemySpawn" + i;
             var enemySpawn = map.findObject("Objects", obj => obj.name === enemyName);
