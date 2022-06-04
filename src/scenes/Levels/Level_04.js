@@ -1,13 +1,14 @@
+
 class Level_04 extends Phaser.Scene {
     constructor() {
         super("Level_04");
-         
+         this.isPaused = false;
     }
 
     create(){
-        // set up Phaser-provided cursor key input        
-        // set up Scene switcher
+
         currentScene = 4;
+        // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown", sceneSwitcher);
 
@@ -16,24 +17,16 @@ class Level_04 extends Phaser.Scene {
         this.eat = this.sound.add("eatEnemy");
         this.getEaten = this.sound.add("getEaten");
 
-        // animations
-        this.anims.create({
-            key : 'pie_flip',
-            frames: [
-                {key : 'pie_blue'},
-                {key : 'pie_red', duration: .5}
-            ],
-            frameRate: 7,
-            repeat: 3
-        });
+        //Background void
+        this.background = this.add.tileSprite(0,0,game.config.width*6, game.config.height*6, 'yellow_checker').setOrigin(0.5,0.5);
         
         // Set up tiles
         const map = this.make.tilemap({key: 'level_4_map'});
-        const tileset = map.addTilesetImage('PlsTiles','tiles');
+        const tileset = map.addTilesetImage('TileSet','tileset');
 
         // Set up the Tiled Layers
         const groundLayer = map.createLayer("Ground", tileset, 0, 0);
-        const redDoorLayer = map.createLayer("RedDoor", tileset, 0, 0);
+        const pinkDoorLayer = map.createLayer("PinkDoor", tileset, 0, 0);
         const greenDoorLayer = map.createLayer("GreenDoor", tileset, 0, 0);
         const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
@@ -42,7 +35,7 @@ class Level_04 extends Phaser.Scene {
         wallLayer.setCollisionByProperty({
             collides: true
         });
-        redDoorLayer.setCollisionByProperty({
+        pinkDoorLayer.setCollisionByProperty({
             collides: true
         });
         greenDoorLayer.setCollisionByProperty({
@@ -52,14 +45,34 @@ class Level_04 extends Phaser.Scene {
             collides: true
         });
 
-        
+        //button animations
+        this.anims.create({
+            key: "blue_pressed",
+            frames: this.anims.generateFrameNumbers('blueButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: "pink_pressed",
+            frames: this.anims.generateFrameNumbers('pinkButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: "green_pressed",
+            frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
+
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
+        this.win;
         this.createObjects(map);
 
         // adds the player
         this.player;
+        mode = 1;
         this.createPlayer(map);
         
         // Add enemies
@@ -68,10 +81,10 @@ class Level_04 extends Phaser.Scene {
         
 
         // The player acts like a square?
-        var redPlayerCollider = this.physics.add.collider(this.player, redDoorLayer);
+        var pinkPlayerCollider = this.physics.add.collider(this.player, pinkDoorLayer);
         var greenPlayerCollider = this.physics.add.collider(this.player, greenDoorLayer);
         var bluePlayerCollider = this.physics.add.collider(this.player, blueDoorLayer);
-        var redEnemyCollider = this.physics.add.collider(this.enemyGroup, redDoorLayer);
+        var pinkEnemyCollider = this.physics.add.collider(this.enemyGroup, pinkDoorLayer);
         var greenEnemyCollider = this.physics.add.collider(this.enemyGroup, greenDoorLayer);
         var blueEnemyCollider = this.physics.add.collider(this.enemyGroup, blueDoorLayer);
 
@@ -79,12 +92,19 @@ class Level_04 extends Phaser.Scene {
         this.physics.add.collider(this.enemyGroup, wallLayer);
         this.physics.add.collider(this.player, this.enemyGroup, EatOrDie, null, this);
 
+        this.physics.add.overlap(this.player, this.win, (player, win) =>{
+            this.eat.play();
+            this.scene.start("Level_04");
+        });
+
         this.physics.add.overlap(this.player, this.buttonGroup, (player, button) =>{
             if(button.pressed == true){
                 return;
             }
             else if(button.pressed == false){
                 button.pressed = true;
+                this.eat.play();
+               
             }
             
             if(button.color == "green"){
@@ -95,6 +115,7 @@ class Level_04 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("green_pressed");
             }
             if(button.color == "blue"){
                 this.physics.world.removeCollider(bluePlayerCollider);
@@ -104,25 +125,44 @@ class Level_04 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("blue_pressed");
             }
-            if(button.color == "red"){
-                this.physics.world.removeCollider(redPlayerCollider);
-                this.physics.world.removeCollider(redEnemyCollider);
-                redDoorLayer.forEachTile(tile =>{
+            if(button.color == "pink"){
+                this.physics.world.removeCollider(pinkPlayerCollider);
+                this.physics.world.removeCollider(pinkEnemyCollider);
+                pinkDoorLayer.forEachTile(tile =>{
                     if(tile.index != -1){
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("pink_pressed");
             }
         });
 
-        // Check the collision of the layers. [wallLayer]
-        const debugGraphics = this.add.graphics().setAlpha(0.6);
-        wallLayer.renderDebug(debugGraphics, {
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
-            faceColor: new Phaser.Display.Color(40, 39, 37,255)
-        });
+        // // Check the collision of the layers. [wallLayer]
+        // const debugGraphics = this.add.graphics().setAlpha(0.6);
+        // wallLayer.renderDebug(debugGraphics, {
+        //     tileColor: null,
+        //     collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
+        //     faceColor: new Phaser.Display.Color(40, 39, 37,255)
+        // });
+
+        // Add pause and reset buttons
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5).setScrollFactor(0);
+        this.pause.setInteractive().on('pointerdown',()=>{
+            if(this.isPaused == false){
+                this.physics.pause();
+                this.isPaused = true;
+            }else{
+                this.physics.resume();
+                this.isPaused = false;
+            }
+        }, this);
+
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5).setScrollFactor(0);
+        this.reset.setInteractive().on('pointerdown',()=>{
+            this.scene.restart();
+        }, this);
 
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
@@ -144,6 +184,7 @@ class Level_04 extends Phaser.Scene {
             }
             this.mouse = pointer;
         })
+
         this.cameras.main.startFollow(this.player);
 
         this.input.on('pointerdown', (pointer) =>{
@@ -191,6 +232,7 @@ class Level_04 extends Phaser.Scene {
 
         // adds the enemies
         while(true){
+            var enemySpeed = -1;
             i += 1;
             enemyName = "enemySpawn" + i;
             var enemySpawn = map.findObject("Objects", obj => obj.name === enemyName);
@@ -202,10 +244,12 @@ class Level_04 extends Phaser.Scene {
                 if(enemySpawn.properties[i].name == 'size'){
                     enemySize = enemySpawn.properties[i].value;
                 }            
-                //console.log(enemySpawn.properties[i].name , enemySpawn.properties[i].value);
+                if(enemySpawn.properties[i].name == 'speed'){
+                    enemySpeed = enemySpawn.properties[i].value;
+                } 
             }
 
-            var enemy = new Enemy_Ball(this, enemySpawn.x, enemySpawn.y, "enemy", enemySize, 0).setOrigin(0.5,0.5);
+            var enemy = new Enemy_Ball(this, enemySpawn.x, enemySpawn.y, "enemy", enemySize, enemySpeed, 0).setOrigin(0.5,0.5);
             this.enemyGroup.add(enemy);
         }
     }
@@ -213,6 +257,7 @@ class Level_04 extends Phaser.Scene {
     createObjects(map){
         var buttonName = '';
         var buttonColor = '';
+        var buttonSprite = '';
         var buttonSize = 1;
         var i = 0;
         // adds the buttons
@@ -233,8 +278,27 @@ class Level_04 extends Phaser.Scene {
                 }   
             }
 
-            var button = new Button(this, buttonSpawn.x, buttonSpawn.y, "tiles",buttonSize, buttonColor, 0);
+            if(buttonColor == "green"){
+                buttonSprite = "greenButton";
+            }
+            else if(buttonColor == "blue"){
+                buttonSprite = "blueButton";
+            }
+            else if(buttonColor == "pink"){
+                buttonSprite = "pinkButton";
+            }
+            else{
+                console.log("ERROR: Failed to pick sprite");
+            }
+            var button = new Button(this, buttonSpawn.x, buttonSpawn.y, buttonSprite,buttonSize, buttonColor, 0);
             this.buttonGroup.add(button);
         }
+
+        var flagSpawn = map.findObject("Objects", obj => obj.name === "flagSpawn");
+        if(!flagSpawn){
+            console.log("ERROR: Flag did not spawn");
+            return;
+        }
+        this.win = new Button(this, flagSpawn.x, flagSpawn.y, "win_flag", 40, "win",0);
     }
 }

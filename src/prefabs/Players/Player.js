@@ -25,6 +25,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   Grow(enemy){
+    console.log(enemy);
    
     console.log("in grow");
     // this.play('pie_flip');
