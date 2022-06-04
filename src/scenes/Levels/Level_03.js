@@ -26,27 +26,27 @@ class Level_03 extends Phaser.Scene {
 
       // Set up the Tiled Layers
       const groundLayer = map.createLayer("Ground", tileset, 0, 0);
-      //const pinkDoorLayer = map.createLayer("PinkDoor", tileset, 0, 0);
+      const pinkDoorLayer = map.createLayer("PinkDoor", tileset, 0, 0);
       const greenDoorLayer = map.createLayer("GreenDoor", tileset, 0, 0);
-      //const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
+      const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
       const wallLayer = map.createLayer("Walls", tileset, 0, 0);
 
       // Set any properties from any layers
       wallLayer.setCollisionByProperty({
           collides: true
       });
-      // redDoorLayer.setCollisionByProperty({
-      //     collides: true
-      // });
+      pinkDoorLayer.setCollisionByProperty({
+          collides: true
+      });
       greenDoorLayer.setCollisionByProperty({
           collides: true
       });
-      // blueDoorLayer.setCollisionByProperty({
-      //     collides: true
-      // });
+      blueDoorLayer.setCollisionByProperty({
+          collides: true
+      });
 
 
-      button animations
+      //button animations
       this.anims.create({
           key: "blue_pressed",
           frames: this.anims.generateFrameNumbers('blueButton', { start: 0, end: -1 }),
@@ -80,12 +80,12 @@ class Level_03 extends Phaser.Scene {
       
 
       // The player acts like a square?
-      //var pinkPlayerCollider = this.physics.add.collider(this.player, pinkDoorLayer);
+      var pinkPlayerCollider = this.physics.add.collider(this.player, pinkDoorLayer);
       var greenPlayerCollider = this.physics.add.collider(this.player, greenDoorLayer);
-      //var bluePlayerCollider = this.physics.add.collider(this.player, blueDoorLayer);
-      //var pinkEnemyCollider = this.physics.add.collider(this.enemyGroup, pinkDoorLayer);
+      var bluePlayerCollider = this.physics.add.collider(this.player, blueDoorLayer);
+      var pinkEnemyCollider = this.physics.add.collider(this.enemyGroup, pinkDoorLayer);
       var greenEnemyCollider = this.physics.add.collider(this.enemyGroup, greenDoorLayer);
-      //var blueEnemyCollider = this.physics.add.collider(this.enemyGroup, blueDoorLayer);
+      var blueEnemyCollider = this.physics.add.collider(this.enemyGroup, blueDoorLayer);
 
       this.physics.add.collider(this.player, wallLayer);        
       this.physics.add.collider(this.enemyGroup, wallLayer);
@@ -93,7 +93,7 @@ class Level_03 extends Phaser.Scene {
 
       this.physics.add.overlap(this.player, this.win, (player, win) =>{
           this.eat.play();
-          this.scene.start("Level_02");
+          this.scene.start("Level_04");
       });
 
       this.physics.add.overlap(this.player, this.buttonGroup, (player, button) =>{
@@ -124,7 +124,7 @@ class Level_03 extends Phaser.Scene {
                       tile.alpha = 0.2;
                   }
               });
-              // button.play("blue_pressed");
+              button.play("blue_pressed");
           }
           if(button.color == "pink"){
               this.physics.world.removeCollider(pinkPlayerCollider);
@@ -134,9 +134,52 @@ class Level_03 extends Phaser.Scene {
                       tile.alpha = 0.2;
                   }
               });
-              // button.play("pink_pressed");
+              button.play("pink_pressed");
           }
       });
+
+      this.physics.add.overlap(this.enemyGroup, this.buttonGroup, (enemy, button) =>{
+        if(button.pressed == true){
+            return;
+        }
+        else if(button.pressed == false){
+            button.pressed = true;
+            this.eat.play();
+           
+        }
+        
+        if(button.color == "green"){
+            this.physics.world.removeCollider(greenPlayerCollider);
+            this.physics.world.removeCollider(greenEnemyCollider);
+            greenDoorLayer.forEachTile(tile =>{
+                if(tile.index != -1){
+                    tile.alpha = 0.2;
+                }
+            });
+            button.play("green_pressed");
+        }
+        if(button.color == "blue"){
+            this.physics.world.removeCollider(bluePlayerCollider);
+            this.physics.world.removeCollider(blueEnemyCollider);
+            blueDoorLayer.forEachTile(tile =>{
+                if(tile.index != -1){
+                    tile.alpha = 0.2;
+                }
+            });
+            button.play("blue_pressed");
+        }
+        if(button.color == "pink"){
+            this.physics.world.removeCollider(pinkPlayerCollider);
+            this.physics.world.removeCollider(pinkEnemyCollider);
+            pinkDoorLayer.forEachTile(tile =>{
+                if(tile.index != -1){
+                    tile.alpha = 0.2;
+                }
+            });
+            button.play("pink_pressed");
+        }
+    });
+
 
       // // Check the collision of the layers. [wallLayer]
       // const debugGraphics = this.add.graphics().setAlpha(0.6);
