@@ -65,6 +65,12 @@ class Level_03 extends Phaser.Scene {
           frameRate: 12,
       });
 
+      this.anims.create({
+        key: "donut_bite",
+        frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
+        frameRate: 12,
+    });
+
       // Add objects
       this.buttonGroup = this.physics.add.group();
       this.win;
