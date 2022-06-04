@@ -300,6 +300,7 @@ class Level_03 extends Phaser.Scene {
 
           var enemy = new Enemy_Ball(this, enemySpawn.x, enemySpawn.y, "enemy", enemySize, enemySpeed, 0).setOrigin(0.5,0.5);
           this.enemyGroup.add(enemy);
+          enemy.play("donut_bite");
       }
   }
 
