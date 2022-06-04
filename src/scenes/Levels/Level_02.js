@@ -6,9 +6,9 @@ class Level_02 extends Phaser.Scene {
     }
 
     create(){
-        // set up Phaser-provided cursor key input        
-        // set up Scene switcher
+
         currentScene = 2;
+        // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown", sceneSwitcher);
 
@@ -18,10 +18,10 @@ class Level_02 extends Phaser.Scene {
         this.getEaten = this.sound.add("getEaten");
 
         //Background void
-        this.background = this.add.tileSprite(0,0,game.config.width*3, game.config.height*3, 'yellow_checker').setOrigin(0.5,0.5);
+        this.background = this.add.tileSprite(0,0,game.config.width*6, game.config.height*3, 'yellow_checker').setOrigin(0.5,0.5);
         
         // Set up tiles
-        const map = this.make.tilemap({key: 'test_map'});
+        const map = this.make.tilemap({key: 'level_2_map'});
         const tileset = map.addTilesetImage('TileSet','tileset');
 
         // Set up the Tiled Layers
@@ -45,7 +45,25 @@ class Level_02 extends Phaser.Scene {
             collides: true
         });
 
-        
+        //button animations
+        this.anims.create({
+            key: "blue_pressed",
+            frames: this.anims.generateFrameNumbers('blueButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: "pink_pressed",
+            frames: this.anims.generateFrameNumbers('pinkButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: "green_pressed",
+            frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
+
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
@@ -85,6 +103,7 @@ class Level_02 extends Phaser.Scene {
             else if(button.pressed == false){
                 button.pressed = true;
                 this.eat.play();
+               
             }
             
             if(button.color == "green"){
@@ -95,6 +114,7 @@ class Level_02 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("green_pressed");
             }
             if(button.color == "blue"){
                 this.physics.world.removeCollider(bluePlayerCollider);
@@ -104,6 +124,7 @@ class Level_02 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("blue_pressed");
             }
             if(button.color == "pink"){
                 this.physics.world.removeCollider(pinkPlayerCollider);
@@ -113,6 +134,7 @@ class Level_02 extends Phaser.Scene {
                         tile.alpha = 0.2;
                     }
                 });
+                button.play("pink_pressed");
             }
         });
 
@@ -123,6 +145,23 @@ class Level_02 extends Phaser.Scene {
         //     collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
         //     faceColor: new Phaser.Display.Color(40, 39, 37,255)
         // });
+
+        // Add pause and reset buttons
+        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5).setScrollFactor(0);
+        this.pause.setInteractive().on('pointerdown',()=>{
+            if(this.isPaused == false){
+                this.physics.pause();
+                this.isPaused = true;
+            }else{
+                this.physics.resume();
+                this.isPaused = false;
+            }
+        }, this);
+
+        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5).setScrollFactor(0);
+        this.reset.setInteractive().on('pointerdown',()=>{
+            this.scene.restart();
+        }, this);
 
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
@@ -144,6 +183,7 @@ class Level_02 extends Phaser.Scene {
             }
             this.mouse = pointer;
         })
+
         this.cameras.main.startFollow(this.player);
 
         this.input.on('pointerdown', (pointer) =>{
@@ -157,18 +197,6 @@ class Level_02 extends Phaser.Scene {
             }
             mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
         });
-
-        this.pause = this.add.sprite(game.config.width - 40,60, 'pause').setOrigin(.5,.5);
-        this.pause.setInteractive().on('pointerdown',()=>{
-            if(this.isPaused == false){
-                this.physics.pause();
-                this.isPaused = true;
-            }else{
-                this.physics.resume();
-                this.isPaused = false;
-            } 
-        }, this);
-
     }
 
     update(){
@@ -199,11 +227,11 @@ class Level_02 extends Phaser.Scene {
     createEnemies(map){
         var enemyName = '';
         var enemySize = 1;
-        var enemySpeed = -1;
         var i = 0;
 
         // adds the enemies
         while(true){
+            var enemySpeed = -1;
             i += 1;
             enemyName = "enemySpawn" + i;
             var enemySpawn = map.findObject("Objects", obj => obj.name === enemyName);

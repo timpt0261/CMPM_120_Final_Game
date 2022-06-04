@@ -95,7 +95,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       else{
         this.scene.physics.moveToObject(this, mouse, 0);
       }
-      console.log(this.speed / this.size);
     }
 
   }
