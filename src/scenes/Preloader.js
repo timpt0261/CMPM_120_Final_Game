@@ -51,6 +51,7 @@ class Preloader extends Phaser.Scene {
     this.load.audio('wallBonk','/music/wallBonk.wav');
     this.load.audio('eatEnemy', '/music/eatEnemy.wav');
     this.load.audio('getEaten', '/music/getEaten.wav');
+    this.load.audio('bgMusic', '/music/bossa_nova.mp3');
   }
 
   createBackground(){

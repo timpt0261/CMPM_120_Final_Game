@@ -94,7 +94,7 @@ class Level_02 extends Phaser.Scene {
 
         this.physics.add.overlap(this.player, this.win, (player, win) =>{
             this.eat.play();
-            this.scene.start("Level_04");
+            this.scene.start("Level_03");
         });
 
         this.physics.add.overlap(this.player, this.buttonGroup, (player, button) =>{
