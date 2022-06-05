@@ -6,7 +6,6 @@ class Level_02 extends Phaser.Scene {
     }
   
     create(){
-  
         currentScene = 2;
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
@@ -19,6 +18,7 @@ class Level_02 extends Phaser.Scene {
   
         //Background void
         this.background = this.add.tileSprite(0,0,game.config.width*10, game.config.height*10, 'blue_checker').setOrigin(0.5,0.5);
+
         
         // Set up tiles
         const map = this.make.tilemap({key: 'level_2_map'});
@@ -44,21 +44,20 @@ class Level_02 extends Phaser.Scene {
         blueDoorLayer.setCollisionByProperty({
             collides: true
         });
-  
-  
+
         //button animations
         this.anims.create({
             key: "blue_pressed",
             frames: this.anims.generateFrameNumbers('blueButton', { start: 0, end: -1 }),
             frameRate: 12,
         });
-  
+
         this.anims.create({
             key: "pink_pressed",
             frames: this.anims.generateFrameNumbers('pinkButton', { start: 0, end: -1 }),
             frameRate: 12,
         });
-  
+
         this.anims.create({
             key: "green_pressed",
             frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
@@ -71,6 +70,7 @@ class Level_02 extends Phaser.Scene {
           frameRate: 12,
       });
   
+
         // Add objects
         this.buttonGroup = this.physics.add.group();
         this.win;
@@ -78,6 +78,7 @@ class Level_02 extends Phaser.Scene {
   
         // adds the player
         this.player;
+        mode = 1;
         this.createPlayer(map);
         
         // Add enemies
@@ -194,7 +195,7 @@ class Level_02 extends Phaser.Scene {
         //     collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
         //     faceColor: new Phaser.Display.Color(40, 39, 37,255)
         // });
-  
+
         // Add pause and reset buttons
         this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5).setScrollFactor(0);
         this.pause.setInteractive().on('pointerdown',()=>{
@@ -206,12 +207,12 @@ class Level_02 extends Phaser.Scene {
                 this.isPaused = false;
             }
         }, this);
-  
+
         this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5).setScrollFactor(0);
         this.reset.setInteractive().on('pointerdown',()=>{
             this.scene.restart();
         }, this);
-  
+
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
             var distX = Phaser.Math.Distance.Between(this.player.x,0, game.config.width /2 , 0);
@@ -232,7 +233,7 @@ class Level_02 extends Phaser.Scene {
             }
             this.mouse = pointer;
         })
-  
+
         this.cameras.main.startFollow(this.player);
   
         this.input.on('pointerdown', (pointer) =>{
@@ -276,11 +277,11 @@ class Level_02 extends Phaser.Scene {
     createEnemies(map){
         var enemyName = '';
         var enemySize = 1;
-        var enemySpeed = -1;
         var i = 0;
   
         // adds the enemies
         while(true){
+            var enemySpeed = -1;
             i += 1;
             enemyName = "enemySpawn" + i;
             var enemySpawn = map.findObject("Objects", obj => obj.name === enemyName);

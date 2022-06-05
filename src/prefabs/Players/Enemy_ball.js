@@ -12,6 +12,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     this.speed = speed;
 
 
+
     scene.add.existing(this);
     scene.physics.add.existing(this);
 

@@ -27,8 +27,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   Grow(enemy){
        
    this.size + enemy.size >  100 ? this.size = 100 : this.size += enemy.size;
-    
    let scale = this.size/200;  
+
 
   this.setScale(scale);
     
@@ -89,7 +89,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       else{
         this.scene.physics.moveToObject(this, mouse, 0);
       }
-      console.log(this.speed / this.size);
     }
 
   }

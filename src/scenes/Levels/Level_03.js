@@ -78,6 +78,7 @@ class Level_03 extends Phaser.Scene {
 
       // adds the player
       this.player;
+      mode = 1;
       this.createPlayer(map);
       
       // Add enemies
