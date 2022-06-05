@@ -195,7 +195,7 @@ class Level_05 extends Phaser.Scene {
         // });
   
         // Add pause and reset buttons
-        this.pause = this.add.sprite(game.config.width - 80,60, 'pause').setOrigin(.5,.5).setScrollFactor(0);
+        this.pause = this.add.sprite(680,150, 'pause').setOrigin(.5,.5).setScrollFactor(0).setScale(.5);
         this.pause.setInteractive().on('pointerdown',()=>{
             if(this.isPaused == false){
                 this.physics.pause();
@@ -206,7 +206,7 @@ class Level_05 extends Phaser.Scene {
             }
         }, this);
   
-        this.reset = this.add.sprite(game.config.width - 40,60, 'restart').setOrigin(.5,.5).setScrollFactor(0);
+        this.reset = this.add.sprite(700,150, 'restart').setOrigin(.5,.5).setScrollFactor(0).setScale(.5);
         this.reset.setInteractive().on('pointerdown',()=>{
             this.scene.restart();
         }, this);
@@ -233,6 +233,7 @@ class Level_05 extends Phaser.Scene {
         })
   
         this.cameras.main.startFollow(this.player);
+        this.cameras.main.zoom = 1.5;
   
         this.input.on('pointerdown', (pointer) =>{
             if(mode == 0){
