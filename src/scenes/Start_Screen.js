@@ -11,9 +11,18 @@ class Start_Screen extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         // set up Scene switcher
         this.input.keyboard.on("keydown", sceneSwitcher);
-
-        
         this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_checker').setOrigin(0);
+
+        let title = this.add.image(450, 60, 'title').setScale(2);
+        let play = this.add.image(800, 400, 'play_btn').setScale(.35);
+
+        title.alpha = 0;
+        play.alpha = 0;
+   
+
+    
+       
+       
 
         this.anims.create({
             key : "start",
@@ -22,26 +31,20 @@ class Start_Screen extends Phaser.Scene {
         
         });
 
-        this.anims.create({
-            key: 'loop',
-            frames: this.anims.generateFrameNumbers('opening_animation', { start: 14, end: -1 }),
-            frameRate: 7,
-            repeat: -1,
-            yoyo : true,
-        })
 
-        let open_anims =this.add.sprite(game.config.width/2,game.config.height/2, 'opening_animation');
-
+        let open_anims =this.add.sprite(game.config.width/2,game.config.height/2  + 55, 'opening_animation');
         open_anims.play('start');
-
-        let play = this.add.image(800, 400, 'play_btn').setScale(.35);
+       
+        open_anims.on('animationcomplete',()=>{
+            title.alpha = 1;
+            play.alpha = 1;
+            
+           
+        });
+       
         play.setInteractive().on('pointerdown', ()=>{
             this.scene.start("Level_01")
-        })
+        });
 
-
-
-
-        // open_anims.play('loop');
     }
 }

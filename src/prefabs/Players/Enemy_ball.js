@@ -29,22 +29,22 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
     let sizeDiff = this.size - player.size;
 
     if(this.speed != -1){
-      if (dist <= 500 && sizeDiff >= 0) {
+      if (dist <= 200 && sizeDiff >= 0) {
         //console.log(dist);
         this.scene.physics.moveToObject(this,player, this.speed);
         // this.eat_or_die = true;
-      } else if (dist <= 500 && sizeDiff < 0) {
+      } else if (dist <= 200 && sizeDiff < 0) {
         // else if the enemy is smaller and distance is 200, it will move away
         //   player.Grow(enemy);     
         this.scene.physics.moveToObject(this, player, -this.speed);
       }
     }
     else{
-      if (dist <= 500 && sizeDiff >= 0) {
+      if (dist <= 200 && sizeDiff >= 0) {
         //console.log(dist);
         this.scene.physics.moveToObject(this,player, 2000 / this.size);
         // this.eat_or_die = true;
-      } else if (dist <= 500 && sizeDiff < 0) {
+      } else if (dist <= 200 && sizeDiff < 0) {
         // else if the enemy is smaller and distance is 200, it will move away
         //   player.Grow(enemy);     
         this.scene.physics.moveToObject(this, player, -2000 / this.size);
