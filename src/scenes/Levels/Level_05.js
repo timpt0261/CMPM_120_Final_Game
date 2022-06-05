@@ -19,7 +19,7 @@ class Level_05 extends Phaser.Scene {
   
         //Background void
         this.background = this.add.tileSprite(0,0,game.config.width*3, game.config.height*3, 'yellow_checker').setOrigin(0.5,0.5);
-        
+  
         // Set up tiles
         const map = this.make.tilemap({key: 'level_5_map'});
         const tileset = map.addTilesetImage('TileSet','tileset');
@@ -99,6 +99,7 @@ class Level_05 extends Phaser.Scene {
   
         this.physics.add.overlap(this.player, this.win, (player, win) =>{
             this.eat.play();
+            this.scene.start("endScene");
         });
   
         this.physics.add.overlap(this.player, this.buttonGroup, (player, button) =>{
@@ -348,7 +349,7 @@ class Level_05 extends Phaser.Scene {
             console.log("ERROR: Flag did not spawn");
             return;
         }
-        this.win = new Button(this, flagSpawn.x, flagSpawn.y, "win_flag", 40, "win",0);
+        this.win = new Button(this, flagSpawn.x, flagSpawn.y, "win_flag", 40, "win",0).setScale(.8);
     }
   }
   
