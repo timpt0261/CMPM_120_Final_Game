@@ -456,14 +456,14 @@
                         {
                          "name":"size",
                          "type":"int",
-                         "value":60
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":596,
-                 "y":407.333333333333
+                 "x":594,
+                 "y":398.666666666666
                 }, 
                 {
                  "height":0,

@@ -96,7 +96,9 @@ class Preloader extends Phaser.Scene {
 
     this.load.tilemapTiledJSON("level_3_map", "level3.json");        
 
-    this.load.tilemapTiledJSON("level_4_map", "testlvl.json");   
+    this.load.tilemapTiledJSON("level_4_map", "testlvl.json");
+
+    this.load.tilemapTiledJSON("level_5_map", "level5.json");    
   }
 
   create() {

@@ -812,9 +812,9 @@
    </properties>
    <point/>
   </object>
-  <object id="11" name="enemySpawn3" x="596" y="407.333">
+  <object id="11" name="enemySpawn3" x="594" y="398.667">
    <properties>
-    <property name="size" type="int" value="60"/>
+    <property name="size" type="int" value="50"/>
    </properties>
    <point/>
   </object>
