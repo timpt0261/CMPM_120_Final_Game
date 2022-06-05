@@ -35,7 +35,7 @@ class Enemy_Ball extends Phaser.Physics.Arcade.Sprite{
         this.scene.physics.moveToObject(this,player, this.speed);
         // this.eat_or_die = true;
       } else if (dist <= 500 && sizeDiff < 0) {
-        // else if the enemy is smaller and distance is 200, it will move away
+        // else if the enemy is smaller and distance is 500, it will move away
         //   player.Grow(enemy);     
         this.scene.physics.moveToObject(this, player, -this.speed);
       }

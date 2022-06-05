@@ -20,6 +20,7 @@ class Preloader extends Phaser.Scene {
     this.load.image("play_btn", "play_button.png");
     this.load.image("pause", "pause.png");
     this.load.image("restart", "restart.png");
+    this.load.image("title", "title.png");
   }
   createCharAndInt(){
     this.load.path = "assets/art/Characters_Interactables/";
@@ -56,8 +57,8 @@ class Preloader extends Phaser.Scene {
 
   createBackground(){
     this.load.path = "assets/art/Background/";
-    this.load.image("blue_checker_sm", "checker_background_1.png");
-    this.load.image("blue_checker_lg", "checker_background_2.png");
+    this.load.image("green_checker", "checker_background_1.png");
+    this.load.image("blue_checker", "checker_background_2.png");
     this.load.image("red_checker", "pie_background_1.png");
     this.load.image("yellow_checker", "pie_background_2.png");
 
@@ -93,10 +94,14 @@ class Preloader extends Phaser.Scene {
     this.load.tilemapTiledJSON("level_1_map", "level1.json");
     this.load.tilemapTiledJSON("level_2_map", "level2.json");
 
-    this.load.tilemapTiledJSON("level_3_map", "reuben_level.json");      
+    this.load.tilemapTiledJSON("level_2_map", "level2.json");    
 
-    this.load.tilemapTiledJSON("test_map", "reuben_level.json");      
-    this.load.tilemapTiledJSON("level_4_map", "level4.json");
+
+    this.load.tilemapTiledJSON("level_3_map", "level3.json");        
+
+    this.load.tilemapTiledJSON("level_4_map", "testlvl.json");
+
+    this.load.tilemapTiledJSON("level_5_map", "level5.json");  
   }
 
   create() {
