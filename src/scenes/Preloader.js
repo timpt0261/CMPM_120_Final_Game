@@ -21,6 +21,7 @@ class Preloader extends Phaser.Scene {
     this.load.image("pause", "pause.png");
     this.load.image("restart", "restart.png");
     this.load.image("title", "title.png");
+    this.load.image("end","end_screen.png" )
   }
   createCharAndInt(){
     this.load.path = "assets/art/Characters_Interactables/";

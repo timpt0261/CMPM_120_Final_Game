@@ -726,7 +726,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="Objects">
-  <object id="1" name="playerSpawn" x="22.6667" y="385.333">
+  <object id="1" name="playerSpawn" x="25.6667" y="378.333">
    <properties>
     <property name="size" type="int" value="20"/>
    </properties>
