@@ -69,7 +69,6 @@ class Level_02 extends Phaser.Scene {
           frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
           frameRate: 12,
       });
-  
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
