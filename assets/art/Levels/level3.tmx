@@ -832,7 +832,7 @@
    </properties>
    <point/>
   </object>
-  <object id="8" name="buttonSpawn3" x="515" y="414.333">
+  <object id="8" name="buttonSpawn3" x="417" y="431">
    <properties>
     <property name="door" value="pink"/>
     <property name="size" type="int" value="20"/>
