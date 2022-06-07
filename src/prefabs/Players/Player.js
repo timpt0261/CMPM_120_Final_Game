@@ -15,8 +15,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     // Maintains collides equal body
-    this.body.setSize(200,200);
-    this.body.setCircle(100);
+    //this.body.setSize(100);
+    this.body.setCircle(90);
     this.setScale(this.size/200);
   }
 
