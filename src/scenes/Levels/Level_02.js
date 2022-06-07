@@ -17,7 +17,7 @@ class Level_02 extends Phaser.Scene {
         this.getEaten = this.sound.add("getEaten");
   
         //Background void
-        this.background = this.add.tileSprite(0,0,game.config.width*10, game.config.height*10, 'blue_checker').setOrigin(0.5,0.5);
+        this.background = this.add.tileSprite(0,0,game.config.width*10, game.config.height*10, 'yellow_checker').setOrigin(0.5,0.5);
 
         
         // Set up tiles
@@ -29,7 +29,6 @@ class Level_02 extends Phaser.Scene {
         const greenDoorLayer = map.createLayer("GreenDoor", tileset, 0, 0);
         const blueDoorLayer = map.createLayer("BlueDoor", tileset, 0, 0);
         const wallLayer = map.createLayer("Walls", tileset, 0, 0);
-        const groundLayer = map.createLayer("Ground", tileset, 0, 0);
   
         // Set any properties from any layers
         wallLayer.setCollisionByProperty({
@@ -69,6 +68,13 @@ class Level_02 extends Phaser.Scene {
           frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
           frameRate: 12,
       });
+
+        this.add.text(690, 410, "Try Clicking", {
+            fontFamily: "Comic Sans MS",
+            fontSize: '20px',
+            color: '#2232B4',
+            align: "center"
+        });
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
@@ -231,6 +237,7 @@ class Level_02 extends Phaser.Scene {
                 pointer.y -= distY;
             }
             this.mouse = pointer;
+            console.log(this.mouse.x,this.mouse.y);
         })
 
         this.cameras.main.startFollow(this.player);
@@ -244,7 +251,7 @@ class Level_02 extends Phaser.Scene {
                 mode = 0;
                 this.player.setTexture('pie_blue');
             }
-            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            //mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
         });
     }
   

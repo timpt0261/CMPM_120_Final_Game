@@ -245,7 +245,7 @@ class Level_03 extends Phaser.Scene {
               mode = 0;
               this.player.setTexture('pie_blue');
           }
-          mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+          //mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
       });
   }
 

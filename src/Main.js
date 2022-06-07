@@ -13,7 +13,7 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     }
 
@@ -107,7 +107,7 @@ let EatOrDie = function (player, enemy){
     // calculate diffence of size
     let sizeDiff = enemy.size - player.size;
 
-    console.log("Player Dist: %f Size Diff: %f", player.size, enemy.size);
+    //console.log("Player Dist: %f Size Diff: %f", player.size, enemy.size);
     // if difference is positve, player will die
     if (sizeDiff >= 0) {
         this.getEaten.play();
