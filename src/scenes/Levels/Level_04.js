@@ -63,7 +63,11 @@ class Level_04 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
             frameRate: 12,
         });
-
+        this.anims.create({
+            key: "donut_bite",
+            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
 
         // Add objects
         this.buttonGroup = this.physics.add.group();
@@ -105,6 +109,49 @@ class Level_04 extends Phaser.Scene {
                 button.pressed = true;
                 this.eat.play();
                
+            }
+            
+            if(button.color == "green"){
+                this.physics.world.removeCollider(greenPlayerCollider);
+                this.physics.world.removeCollider(greenEnemyCollider);
+                greenDoorLayer.forEachTile(tile =>{
+                    if(tile.index != -1){
+                        tile.alpha = 0.2;
+                    }
+                });
+                button.play("green_pressed");
+            }
+            if(button.color == "blue"){
+                this.physics.world.removeCollider(bluePlayerCollider);
+                this.physics.world.removeCollider(blueEnemyCollider);
+                blueDoorLayer.forEachTile(tile =>{
+                    if(tile.index != -1){
+                        tile.alpha = 0.2;
+                    }
+                });
+                button.play("blue_pressed");
+            }
+            if(button.color == "pink"){
+                this.physics.world.removeCollider(pinkPlayerCollider);
+                this.physics.world.removeCollider(pinkEnemyCollider);
+                pinkDoorLayer.forEachTile(tile =>{
+                    if(tile.index != -1){
+                        tile.alpha = 0.2;
+                    }
+                });
+                button.play("pink_pressed");
+            }
+        });
+
+        
+        this.physics.add.overlap(this.enemyGroup, this.buttonGroup, (enemy, button) =>{
+            if(button.pressed == true){
+                return;
+            }
+            else if(button.pressed == false){
+                button.pressed = true;
+                this.eat.play();
+            
             }
             
             if(button.color == "green"){
@@ -251,6 +298,7 @@ class Level_04 extends Phaser.Scene {
 
             var enemy = new Enemy_Ball(this, enemySpawn.x, enemySpawn.y, "enemy", enemySize, enemySpeed, 0).setOrigin(0.5,0.5);
             this.enemyGroup.add(enemy);
+            enemy.play("donut_bite");
         }
     }
 
