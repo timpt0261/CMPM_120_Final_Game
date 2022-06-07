@@ -6,7 +6,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 900,
     height: 640,
-    scene: [Preloader, Start_Screen ,Level_01,Level_02,Level_03, Level_04],
+    scene: [Preloader, Start_Screen ,Level_01,Level_02,Level_03, Level_04, Level_05, EndScreen],
     title: 'P.I.E(Puzzle Intense Experiance)',
 
     physics: {
@@ -33,6 +33,8 @@ let sceneSwitcher = (event) => {
             game.scene.pause('Level_02');
             game.scene.pause('Level_03');
             game.scene.pause('level_04');
+            game.scene.pause('Level_05');
+            game.scene.pause('endScene');
             break;
 
         case '1':
@@ -43,6 +45,8 @@ let sceneSwitcher = (event) => {
             game.scene.pause('Level_02');
             game.scene.pause('Level_03');
             game.scene.pause('Level_04');
+            game.scene.pause('Level_05');
+            game.scene.pause('endScene');
 
             break;
         case '2':
@@ -53,6 +57,8 @@ let sceneSwitcher = (event) => {
             game.scene.pause('Level_01');
             game.scene.pause('Level_03');
             game.scene.pause('Level_04');
+            game.scene.pause('Level_05');
+            game.scene.pause('endScene');
 
             break;
         case '3':
@@ -63,6 +69,8 @@ let sceneSwitcher = (event) => {
             game.scene.pause('Level_01');
             game.scene.pause('Level_02');
             game.scene.pause('Level_04');
+            game.scene.pause('Level_05');
+            game.scene.pause('endScene');
 
             break;
         case '4':
@@ -73,8 +81,22 @@ let sceneSwitcher = (event) => {
             game.scene.pause('Level_01');
             game.scene.pause('Level_02');
             game.scene.pause('Level_03');
+            game.scene.pause('Level_05');
+            game.scene.pause('endScene');
 
             break;
+        case '5':
+            console.log("In scene 5\n");
+            game.scene.start('Level_05');
+            game.scene.bringToTop('Level_05');
+            game.scene.pause('start_screenScene');
+            game.scene.pause('Level_01');
+            game.scene.pause('Level_02');
+            game.scene.pause('Level_03');
+            game.scene.pause('Level_04');
+            game.scene.pause('endScene');
+            break;
+        
     }
 
 }
@@ -109,6 +131,7 @@ let EatOrDie = function (player, enemy){
         // enemy is removed    
         this.enemyGroup.remove(enemy, true);
     }
+
 }
 
 
