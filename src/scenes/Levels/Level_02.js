@@ -63,6 +63,11 @@ class Level_02 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('greenButton', { start: 0, end: -1 }),
             frameRate: 12,
         });
+        this.anims.create({
+            key: "donut_bite",
+            frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
+            frameRate: 12,
+        });
 
 
         // Add objects
@@ -251,6 +256,7 @@ class Level_02 extends Phaser.Scene {
 
             var enemy = new Enemy_Ball(this, enemySpawn.x, enemySpawn.y, "enemy", enemySize, enemySpeed, 0).setOrigin(0.5,0.5);
             this.enemyGroup.add(enemy);
+            enemy.play("donut_bite");
         }
     }
 
