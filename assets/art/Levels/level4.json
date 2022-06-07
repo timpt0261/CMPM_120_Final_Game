@@ -603,8 +603,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":800.333333333333,
-                 "y":199.666666666667
+                 "x":800,
+                 "y":200
                 }, 
                 {
                  "height":0,
@@ -863,7 +863,7 @@
                         {
                          "name":"speed",
                          "type":"int",
-                         "value":100
+                         "value":80
                         }],
                  "rotation":0,
                  "type":"",
@@ -902,7 +902,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":18,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",

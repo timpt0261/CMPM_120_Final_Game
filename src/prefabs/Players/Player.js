@@ -26,7 +26,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
   Grow(enemy){
        
-   this.size + enemy.size >  100 ? this.size = 100 : this.size += enemy.size;
+  //  this.size + enemy.size >  100 ? this.size = 100 : this.size += enemy.size;
+   this.size += enemy.size;
    let scale = this.size/200;  
 
 

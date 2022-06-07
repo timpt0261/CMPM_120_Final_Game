@@ -70,6 +70,22 @@ class Level_01 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: -1 }),
             frameRate: 7,
             repeat: -1
+        });        
+        
+        this.add.text(380, 500, "Bigger = Scary", {
+            fontFamily: "Comic Sans MS",
+            fontSize: '20px',
+            color: '#f77171',
+            align: "center"
+
+        });
+
+        this.add.text(30, 170, "Green opens green door", {
+            fontFamily: "Comic Sans MS",
+            fontSize: '15px',
+            color: '#009437',
+            align: "center"
+
         });
 
         // Add objects
@@ -213,6 +229,8 @@ class Level_01 extends Phaser.Scene {
             this.scene.restart();
         }, this);
 
+
+
         // Get pointer refrence
         this.input.on('pointermove', (pointer) => {
             var distX = Phaser.Math.Distance.Between(this.player.x,0, game.config.width /2 , 0);
@@ -245,7 +263,7 @@ class Level_01 extends Phaser.Scene {
                 mode = 0;
                 this.player.setTexture('pie_blue');
             }
-            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            //mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
         });
     }
 

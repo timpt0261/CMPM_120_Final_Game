@@ -1,4 +1,3 @@
-
 class Level_05 extends Phaser.Scene {
     constructor() {
         super("Level_05");
@@ -7,7 +6,7 @@ class Level_05 extends Phaser.Scene {
   
     create(){
   
-        currentScene = 3;
+        currentScene = 5;
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown", sceneSwitcher);
@@ -78,6 +77,7 @@ class Level_05 extends Phaser.Scene {
   
         // adds the player
         this.player;
+        mode = 1;
         this.createPlayer(map);
         
         // Add enemies
@@ -245,7 +245,7 @@ class Level_05 extends Phaser.Scene {
                 mode = 0;
                 this.player.setTexture('pie_blue');
             }
-            mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
+            //mode == 0 ? console.log("In Grow Mode\n") : console.log("In Shrink Mode\n");
         });
     }
   
@@ -352,4 +352,3 @@ class Level_05 extends Phaser.Scene {
         this.win = new Button(this, flagSpawn.x, flagSpawn.y, "win_flag", 40, "win",0).setScale(.8);
     }
   }
-  

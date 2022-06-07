@@ -24,7 +24,7 @@ class Start_Screen extends Phaser.Scene {
 
         
 
-        this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'red_checker').setOrigin(0);
+        this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'yellow_checker').setOrigin(0);
 
         let title = this.add.image(450, 60, 'title').setScale(2);
         let play = this.add.image(800, 400, 'play_btn').setScale(.35);
