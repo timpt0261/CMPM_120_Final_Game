@@ -1,3 +1,4 @@
 # CMPM_120_Final_Game
-  https://timpt0261.github.io/CMPM_120_Final_Game/
-  https://bluewalrus.itch.io/pie-puzzle-int
+
+[Website](https://timpt0261.github.io/CMPM_120_Final_Game/)  
+[itch.io Page](https://bluewalrus.itch.io/pie-puzzle-int)
