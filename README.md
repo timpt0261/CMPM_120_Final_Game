@@ -6,7 +6,7 @@
 
 P.I.E: Puzzle Intensive Experience
 
-
+![GameScreenShot_1](screenshots/5QNC9J.png)
 
 A mouse-only puzzle game where you control a cute little pie! Use your mouse to move and click to switch between the red grow mode and blue shrink mode. In this game, you get munched by evil donuts if they are bigger than you. However, if you are bigger than the donuts, you can munch them! 
 
